@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[ES6笔记]]></title>
+    <url>%2F2018%2F09%2F07%2FES6%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[ES6ECMA和严格模式ECMA: 它是一种由ECMA组织（前身为欧洲计算机制造商协会）制定和发布的脚本语言规范 我们学的 JavaScript 是ECMA的实现, 但术语ECMAScript和JavaScript平时表达同一个意思 JS包含三个部分： ECMAScript（核心） 扩展 ==&gt; 浏览器端 BOM（浏览器对象模型） DOM（文档对象模型） 扩展 ==&gt; 服务器端 ES的几个重要版本 ES5: 09年发布 ES6(ES2015): 15年发布, 也称为ECMA2015 ES7(ES2016): 16年发布, 也称为ECMA2016 (变化不大) 严格模式: 理解: 除了正常运行模式(混杂模式)，ES5添加了第二种运行模式：”严格模式”（strict mode） 顾名思义，这种模式使得Javascript在更严格的语法条件下运行 目的/作用 消除Javascript语法的一些不合理、不严谨之处，减少一些怪异行为 消除代码运行的一些不安全之处，为代码的安全运行保驾护航 为未来新版本的Javascript做好铺垫 使用 在全局或函数的第一条语句定义为: ‘use strict’ 如果浏览器不支持, 只解析为一条简单的语句, 没有任何副作用 语法和行为改变 必须用var声明变量 禁止自定义的函数中的this指向window 创建eval作用域 对象不能有重名的属性 ES5拓展JSON拓展:1JSON.stringify(obj/arr) js对象(数组)转换为json对象(数组) 1JSON.parse(json) json对象(数组)转换为js对象(数组) Object拓展:ES5给Object扩展了一些静态方法, 常用的2个 Object.create(新创建对象的原型对象, [可选: 新建对象自身属性描述符]) 作用: 以指定对象为原型创建新对象作为返回值返回 可以为新的对象指定自身的属性(一个或多个属性都需要封装成对象传入) 对每个属性的数据属性进行描述(描述也需要封装成对象,包含以下属性) value: 属性的默认值 writable: 属性值是否是可修改 默认为false configurable: 属性是否可重新定义 默认为false enumerable: 属性是否能用 for in 枚举 默认为false Object.defineProperties(obj, prop, descriptor) 作用: 为指定对象精确添加或修改对象的属性(属性描述符封装成对象传入) 数据描述符: configurable: 该属性是否可重新定义 writable: 该属性值是否是可修改 value: 该属性的默认值 enumerable: 该属性是否能用 for in 枚举 访问描述符: 123get: function ()&#123; return 值&#125; 设置扩展属性的值的回调函数, 在使用扩展属性的时候才调用, 返回动态计算出的该属性的值(惰性求值) 123set: function(newValue)&#123; return 值&#125; 修改扩展属性的值时触发的回调函数, 修改后的值作为实参传入 Array方法拓展:12345arr.indexOf(value) //得到值在数组中的第一个下标arr.lastIndexOf(value) //得到值在数组中的最后一个下标arr.forEach(function(item, index)&#123;&#125;) //遍历数组arr.map(function(item, index)&#123;&#125;) //遍历数组将加工后的值 作为新数组返回arr.filter(function(item, index)&#123;&#125;) //遍历过滤出一个新的子数组， 返回条件为true的值 Function拓展:1fun.bind(obj, 参数 ,...) 作用: 将函数内的this绑定为obj, 但并不执行函数,而只将函数返回 面试题: 区别 bind() 与 call() 和 apply() ? 都能指定函数中的 this call(obj, 参数,…) / apply(obj, [参数,…]) 会立即调用函数,传参不一样 bind(obj, 参数 ,…) 不执行函数,只将函数返回 Let 和 Constlet 关键字 作用: 与var类似, 用于声明一个变量 特点: 在块作用域内有效 (ES6中添加) 不能重复声明同名变量 不会预处理, 既不存在变量提升 应用: 循环遍历加监听 使用let取代var是趋势 const 关键字 作用: 定义一个常量 (不可改变引用) 特点: 不能修改 其它特点同let 应用: 保存不用改变的数据]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>ES6</tag>
+        <tag>js</tag>
+      </tags>
+  </entry>
+</search>
