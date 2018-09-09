@@ -106,24 +106,25 @@
 
 
 
-  <meta name="description" content="半路出家，自学前端半年">
-<meta name="keywords" content="无聊大作战,javascript,vue">
-<meta property="og:type" content="website">
-<meta property="og:title" content="无聊大作战">
-<meta property="og:url" content="https://se7suna.github.io/index.html">
+  <meta name="description" content="AJAXAJAX请求是异步执行的，也就是说，要通过回调函数获得响应。 在现代浏览器上写AJAX主要依靠XMLHttpRequest对象 AJAX请求AJAX 是一套 API 核心提供的类型 : XMLHttpRequest AJAX 操作的页面 “不能” 使用文件的方式访问  新建用户代理   状态0 初始化请求代理对象  1const xhr = new XMLHttpRequest">
+<meta name="keywords" content="Ajax,跨域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax笔记">
+<meta property="og:url" content="https://se7suna.github.io/2018/09/07/Ajax笔记/index.html">
 <meta property="og:site_name" content="无聊大作战">
-<meta property="og:description" content="半路出家，自学前端半年">
+<meta property="og:description" content="AJAXAJAX请求是异步执行的，也就是说，要通过回调函数获得响应。 在现代浏览器上写AJAX主要依靠XMLHttpRequest对象 AJAX请求AJAX 是一套 API 核心提供的类型 : XMLHttpRequest AJAX 操作的页面 “不能” 使用文件的方式访问  新建用户代理   状态0 初始化请求代理对象  1const xhr = new XMLHttpRequest">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-09-08T01:17:35.973Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="无聊大作战">
-<meta name="twitter:description" content="半路出家，自学前端半年">
+<meta name="twitter:title" content="Ajax笔记">
+<meta name="twitter:description" content="AJAXAJAX请求是异步执行的，也就是说，要通过回调函数获得响应。 在现代浏览器上写AJAX主要依靠XMLHttpRequest对象 AJAX请求AJAX 是一套 API 核心提供的类型 : XMLHttpRequest AJAX 操作的页面 “不能” 使用文件的方式访问  新建用户代理   状态0 初始化请求代理对象  1const xhr = new XMLHttpRequest">
 
 
 
 
 
 
-  <link rel="canonical" href="https://se7suna.github.io/"/>
+  <link rel="canonical" href="https://se7suna.github.io/2018/09/07/Ajax笔记/"/>
 
 
 
@@ -133,7 +134,7 @@
   };
 </script>
 
-  <title>无聊大作战</title>
+  <title>Ajax笔记 | 无聊大作战</title>
   
 
 
@@ -180,8 +181,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -218,7 +218,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
     <a href="/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
   </li>
@@ -309,9 +309,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -343,11 +343,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/07/Ajax笔记/" itemprop="url">
-                  Ajax笔记
-                </a>
+          <h1 class="post-title" itemprop="name headline">Ajax笔记
               
             
           </h1>
@@ -440,8 +436,7 @@
       
 
       
-        
-          <h1 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h1><p>AJAX请求是异步执行的，也就是说，要通过回调函数获得响应。</p>
+        <h1 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h1><p>AJAX请求是异步执行的，也就是说，要通过回调函数获得响应。</p>
 <p>在现代浏览器上写AJAX主要依靠XMLHttpRequest对象</p>
 <h2 id="AJAX请求"><a href="#AJAX请求" class="headerlink" title="AJAX请求"></a>AJAX请求</h2><p>AJAX 是一套 API 核心提供的类型 : <strong>XMLHttpRequest</strong></p>
 <p>AJAX 操作的页面 “不能” 使用文件的方式访问</p>
@@ -452,14 +447,122 @@
 <p>状态0 初始化请求代理对象</p>
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/07/Ajax笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<a id="more"></a>
+<ol>
+<li><strong>设置请求行</strong></li>
+</ol>
+<blockquote>
+<p>状态1 建立一个与服务端特定端口的连接</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">'GET/POST'</span>, URL)</span><br></pre></td></tr></table></figure>
+<ol>
+<li><strong>设置请求头/体</strong></li>
+</ol>
+<blockquote>
+<p>携带请求参数</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xhr.setRequestHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/x-www-from-urlencoded(/json)'</span>)</span><br><span class="line">xhr.send(<span class="literal">null</span>/<span class="string">'key=value'</span>)</span><br></pre></td></tr></table></figure>
+<ol>
+<li><strong>等待响应</strong></li>
+</ol>
+<blockquote>
+<p>每当 readyState 改变时触发回调函数</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="comment">// 状态2 表示已经收到响应头</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">this</span>.readyState === <span class="number">2</span>) &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span>.getAllResponseHeaders())</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 状态3 表示正在下载响应体</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">this</span>.readyState === <span class="number">3</span>) &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'响应体responseText可能不完整'</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 状态4 表示响应报文全部下载完成</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">this</span>.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">		<span class="comment">// this.status === 200 时表示下载成功</span></span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.status === <span class="number">200</span>) &#123; </span><br><span class="line">			<span class="comment">//响应体数据在 this.responseText 里    </span></span><br><span class="line">			<span class="keyword">var</span> data = <span class="built_in">JSON</span>.parse(<span class="keyword">this</span>.responseText)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="built_in">console</span>.log(<span class="string">'请求失败'</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="GET和POST"><a href="#GET和POST" class="headerlink" title="GET和POST"></a>GET和POST</h2><p>对于一个返回数据的地址我们称之为接口(API)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">GET (一般用于获取数据)</th>
+<th style="text-align:center">POST (一般用于提交数据)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">可见性</td>
+<td style="text-align:center">数据在 URL 中对所有人都是可见的</td>
+<td style="text-align:center">数据不会显示在 URL 中,但可以开发者工具或者抓包可以看到</td>
+</tr>
+<tr>
+<td style="text-align:center">后退按钮/刷新</td>
+<td style="text-align:center">无害</td>
+<td style="text-align:center">数据会被重新提交（浏览器应该告知用户数据会被重新提交）</td>
+</tr>
+<tr>
+<td style="text-align:center">书签</td>
+<td style="text-align:center">可收藏为书签</td>
+<td style="text-align:center">不可收藏为书签</td>
+</tr>
+<tr>
+<td style="text-align:center">缓存</td>
+<td style="text-align:center">能被缓存</td>
+<td style="text-align:center">不能缓存</td>
+</tr>
+<tr>
+<td style="text-align:center">历史</td>
+<td style="text-align:center">参数保留在浏览器历史中</td>
+<td style="text-align:center">参数不会保存在浏览器历史中</td>
+</tr>
+<tr>
+<td style="text-align:center">对数据长度的限制</td>
+<td style="text-align:center">受浏览器限制</td>
+<td style="text-align:center">一般无限制</td>
+</tr>
+<tr>
+<td style="text-align:center">对数据类型的限制</td>
+<td style="text-align:center">只允许 ASCII 字符</td>
+<td style="text-align:center">没有限制 也允许二进制数据</td>
+</tr>
+<tr>
+<td style="text-align:center">编码类型</td>
+<td style="text-align:center">/x-www-form-urlencoded</td>
+<td style="text-align:center">/x-www-form-urlencoded 或 multipart/form-data 为二进制数据使用多重编码</td>
+</tr>
+<tr>
+<td style="text-align:center">安全性</td>
+<td style="text-align:center">GET 的安全性较差，因为所发送的数据是 URL 的一部分</td>
+<td style="text-align:center">POST 比 GET 更安全，因为参数不会被保存在浏览器历史或 web 服务器日志中</td>
+</tr>
+<tr>
+<td style="text-align:center">请求过程</td>
+<td style="text-align:center">对于GET方式的请求,浏览器会把http header和data一并发送出去,服务器响应200(返回数据)</td>
+<td style="text-align:center">对于POST,浏览器先发送header,服务器响应100 continue,浏览器再发送data,服务器响应200(返回数据)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="jQuery-ajax"><a href="#jQuery-ajax" class="headerlink" title="jQuery.ajax"></a>jQuery.ajax</h2><p>使用jQuery发送ajax请求</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    type: <span class="string">'get'</span>,</span><br><span class="line">    url: <span class="string">'url'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        key: value</span><br><span class="line">    &#125;,</span><br><span class="line">    dataType: <span class="string">'json'</span>, <span class="comment">// 设置响应体类型</span></span><br><span class="line">    success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'请求成功'</span> + res)</span><br><span class="line">    &#125;,</span><br><span class="line">    error: <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'请求失败'</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    complate: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'请求完成回调'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// get请求简便写法</span></span><br><span class="line">$.get(<span class="string">'url'</span>, &#123;data&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// post请求简便写法</span></span><br><span class="line">$.post(<span class="string">'url'</span>, &#123;data&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 请求 + JSON转换</span></span><br><span class="line">$.getJSON(<span class="string">'url'</span>, &#123;data&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="load方法"><a href="#load方法" class="headerlink" title="load方法"></a>load方法</h2><h3 id="pjax"><a href="#pjax" class="headerlink" title="pjax:"></a>pjax:</h3><p>jQuery.load方法局部刷新页面</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#div'</span>).load(<span class="string">'url #refresh'</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>它将检索 url 返回的页面内容<br>获取ID为 #refresh 元素的内容<br>并且插入到ID为 #div 元素<br>而其他未被检索到的元素将被废弃</p>
+</blockquote>
+<p>ajax请求时切换loading状态</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ajaxStart(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="string">'#loading'</span>).show()</span><br><span class="line">&#125;)</span><br><span class="line">$(<span class="built_in">document</span>).ajaxStop(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="string">'#loading'</span>).hide()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="跨域请求"><a href="#跨域请求" class="headerlink" title="跨域请求"></a>跨域请求</h2><p>同源策略指的就是:不同源地址之间,默认不能相互发送AJAX请求</p>
+<p>不同源地址之间如果需要相互请求,必须服务器和客户端配合才能完成</p>
+<h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP:"></a>JSONP:</h3><p>借助<code>script</code>标签发送跨域请求</p>
+<ol>
+<li><strong>动态设置<code>script</code>标签的<code>src</code>属性</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> randomFun = <span class="string">'jsonp_'</span> + <span class="built_in">Date</span>.now()</span><br><span class="line">script.src = url + <span class="string">'?'</span> + 参数 + <span class="string">'&amp;callback='</span> + randomFun</span><br></pre></td></tr></table></figure>
+<ol>
+<li><strong>定义回调函数:</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>[randomFun] = <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">delete</span> <span class="built_in">window</span>[randomFun]</span><br><span class="line">    <span class="built_in">document</span>.body.removeChild(<span class="string">'script'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><strong>服务端配合:</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">"Content-Type: application/javascript"</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>返回调用随机函数的代码,并将要传递的数据作为实参: 随机函数名(data)</p>
+</blockquote>
+<blockquote>
+<p>jQuery中使用JSONP调用方法和ajax相同, 只需要设置 dataType: “jsonp”</p>
+</blockquote>
+<h3 id="CORS-跨域资源共享"><a href="#CORS-跨域资源共享" class="headerlink" title="CORS( 跨域资源共享):"></a>CORS( 跨域资源共享):</h3><p>服务器设置 <code>header(&#39;Access-Control-Allow-Origin: *&#39;)</code></p>
+
       
     </div>
 
@@ -477,210 +580,38 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://se7suna.github.io/2018/09/07/ES6笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="无聊大作战">
-      <meta itemprop="description" content="半路出家，自学前端半年">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="无聊大作战">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/07/ES6笔记/" itemprop="url">
-                  ES6笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-07 08:16:10" itemprop="dateCreated datePublished" datetime="2018-09-07T08:16:10+08:00">2018-09-07</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-09-09 13:36:08" itemprop="dateModified" datetime="2018-09-09T13:36:08+08:00">2018-09-09</time>
-              
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/Ajax/" rel="tag"><i class="fa fa-tag"></i> Ajax</a>
           
-
+            <a href="/tags/跨域/" rel="tag"><i class="fa fa-tag"></i> 跨域</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <h1 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h1><h2 id="ECMA和严格模式"><a href="#ECMA和严格模式" class="headerlink" title="ECMA和严格模式"></a>ECMA和严格模式</h2><h3 id="ECMA"><a href="#ECMA" class="headerlink" title="ECMA"></a>ECMA</h3><ol>
-<li>它是一种由ECMA组织（前身为欧洲计算机制造商协会）制定和发布的脚本语言规范</li>
-<li>我们学的JavaScript是ECMA的实现, 但术语ECMAScript和JavaScript平时表达同一个意思</li>
-<li><p>JS包含三个部分：</p>
-<ul>
-<li>ECMAScript（核心）</li>
-<li>扩展 ==&gt; 浏览器端<ol>
-<li>BOM（浏览器对象模型）</li>
-<li>DOM（文档对象模型）</li>
-</ol>
-</li>
-<li>扩展 ==&gt; 服务器端</li>
-</ul>
-</li>
-<li><p>ES的几个重要版本</p>
-<ul>
-<li><p>ES5: 09年发布</p>
-</li>
-<li><p>ES6 (ES2015): 15年发布, 也称为ECMA2015</p>
-</li>
-</ul>
-</li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/07/ES6笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/07/ES6笔记/" rel="next" title="ES6笔记">
+                <i class="fa fa-chevron-left"></i> ES6笔记
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -690,14 +621,15 @@
   </article>
 
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -718,8 +650,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -816,6 +757,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AJAX"><span class="nav-text">AJAX</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AJAX请求"><span class="nav-text">AJAX请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET和POST"><span class="nav-text">GET和POST</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-ajax"><span class="nav-text">jQuery.ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#load方法"><span class="nav-text">load方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pjax"><span class="nav-text">pjax:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域请求"><span class="nav-text">跨域请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSONP"><span class="nav-text">JSONP:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CORS-跨域资源共享"><span class="nav-text">CORS( 跨域资源共享):</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -952,6 +909,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
 
   
 
