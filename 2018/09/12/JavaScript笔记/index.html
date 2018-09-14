@@ -114,7 +114,7 @@
 <meta property="og:site_name" content="无聊大作战">
 <meta property="og:description" content="JavaScriptJS 规范 空格  逗号  前不加空格 , 后加空格   关键词 1234if () &amp;#123;	// 关键字后面加空格 	// &amp;#123; 之前加空格&amp;#125;  对象 123ojb = &amp;#123;    a: &quot;前不加空格 : 后加空格&quot;&amp;#125;  函数 1234function() &amp;#123;    //函数的 () 前不加空格    arguments[]">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-14T21:05:46.358Z">
+<meta property="og:updated_time" content="2018-09-14T21:06:42.656Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript笔记">
 <meta name="twitter:description" content="JavaScriptJS 规范 空格  逗号  前不加空格 , 后加空格   关键词 1234if () &amp;#123;	// 关键字后面加空格 	// &amp;#123; 之前加空格&amp;#125;  对象 123ojb = &amp;#123;    a: &quot;前不加空格 : 后加空格&quot;&amp;#125;  函数 1234function() &amp;#123;    //函数的 () 前不加空格    arguments[]">
@@ -383,7 +383,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-15 05:05:46" itemprop="dateModified" datetime="2018-09-15T05:05:46+08:00">2018-09-15</time>
+                <time title="修改时间：2018-09-15 05:06:42" itemprop="dateModified" datetime="2018-09-15T05:06:42+08:00">2018-09-15</time>
               
             
           </span>
@@ -2291,7 +2291,7 @@
 </ol>
 </li>
 <li><p><strong>事件循环</strong> (event loop)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  JS(浏览器主线程模块执行)</span><br><span class="line">  heap		    stack	 →→→	 WebAPIs(浏览器分线程模块执行)</span><br><span class="line">堆内存数据	   栈内存数据     →→→</span><br><span class="line">			                  DOM(事件响应)</span><br><span class="line"> 对象...	          初始化代码执行		  ajax(网络请求)</span><br><span class="line">				         setTimeout(定时器)</span><br><span class="line">       	            循环执行                 ↓↓↓</span><br><span class="line">event loop:	 callback queue ( 任务队列/消息队列/事件队列 ) 待执行回调队列依次执行</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   JS(浏览器主线程模块执行)</span><br><span class="line">  heap		    stack	 →→→	 WebAPIs(浏览器分线程模块执行)</span><br><span class="line">堆内存数据	   栈内存数据     →→→</span><br><span class="line">			                  DOM(事件响应)</span><br><span class="line"> 对象...	          初始化代码执行		  ajax(网络请求)</span><br><span class="line">				         setTimeout(定时器)</span><br><span class="line">       	            循环执行                 ↓↓↓</span><br><span class="line">event loop:	 callback queue ( 任务队列/消息队列/事件队列 ) 待执行回调队列依次执行</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Web Workers</p>
 <p>HTML5提供的一个JS多线程解决方案</p>
