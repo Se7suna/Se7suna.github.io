@@ -106,18 +106,18 @@
 
 
 
-  <meta name="description" content="知识点整理变量提升 所有的var/函数定义/形参都会提升  变量提升不管条件是否成立  浏览器不会重复声明变量, 后var的不会覆盖之前的声明的 var的提升优先于函数表达式  作用域 ES5 没有块级作用域, 只有函数作用域和全局作用域 (let才有块级作用域) 闭包就是使用函数作用域来实现块级作用域的效果 函数执行时所在的作用域在函数定义时决定">
+  <meta name="description" content="知识点整理变量提升 所有的var/函数定义/形参都会提升  变量提升不管条件是否成立  浏览器不会重复声明变量, 后var的不会覆盖之前的声明的 var的提升优先于函数表达式  作用域 ES5 没有块级作用域, 只有函数作用域和全局作用域 (let才有块级作用域) 闭包就是使用函数作用域来实现块级作用域的效果 函数执行时所在的作用域在函数定义时决定  引用数据类型 函数参数是引用传递 对象属性修改">
 <meta name="keywords" content="整理笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="知识点整理">
 <meta property="og:url" content="https://consolelog.wang/2018/09/19/知识点整理/index.html">
 <meta property="og:site_name" content="无聊大作战">
-<meta property="og:description" content="知识点整理变量提升 所有的var/函数定义/形参都会提升  变量提升不管条件是否成立  浏览器不会重复声明变量, 后var的不会覆盖之前的声明的 var的提升优先于函数表达式  作用域 ES5 没有块级作用域, 只有函数作用域和全局作用域 (let才有块级作用域) 闭包就是使用函数作用域来实现块级作用域的效果 函数执行时所在的作用域在函数定义时决定">
+<meta property="og:description" content="知识点整理变量提升 所有的var/函数定义/形参都会提升  变量提升不管条件是否成立  浏览器不会重复声明变量, 后var的不会覆盖之前的声明的 var的提升优先于函数表达式  作用域 ES5 没有块级作用域, 只有函数作用域和全局作用域 (let才有块级作用域) 闭包就是使用函数作用域来实现块级作用域的效果 函数执行时所在的作用域在函数定义时决定  引用数据类型 函数参数是引用传递 对象属性修改">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-18T23:50:17.477Z">
+<meta property="og:updated_time" content="2018-09-19T19:57:19.058Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="知识点整理">
-<meta name="twitter:description" content="知识点整理变量提升 所有的var/函数定义/形参都会提升  变量提升不管条件是否成立  浏览器不会重复声明变量, 后var的不会覆盖之前的声明的 var的提升优先于函数表达式  作用域 ES5 没有块级作用域, 只有函数作用域和全局作用域 (let才有块级作用域) 闭包就是使用函数作用域来实现块级作用域的效果 函数执行时所在的作用域在函数定义时决定">
+<meta name="twitter:description" content="知识点整理变量提升 所有的var/函数定义/形参都会提升  变量提升不管条件是否成立  浏览器不会重复声明变量, 后var的不会覆盖之前的声明的 var的提升优先于函数表达式  作用域 ES5 没有块级作用域, 只有函数作用域和全局作用域 (let才有块级作用域) 闭包就是使用函数作用域来实现块级作用域的效果 函数执行时所在的作用域在函数定义时决定  引用数据类型 函数参数是引用传递 对象属性修改">
 
 
 
@@ -366,12 +366,24 @@
                 
               
 
-              <time title="创建时间：2018-09-19 07:49:03 / 修改时间：07:50:17" itemprop="dateCreated datePublished" datetime="2018-09-19T07:49:03+08:00">2018-09-19</time>
+              <time title="创建时间：2018-09-19 07:49:03" itemprop="dateCreated datePublished" datetime="2018-09-19T07:49:03+08:00">2018-09-19</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-09-20 03:57:19" itemprop="dateModified" datetime="2018-09-20T03:57:19+08:00">2018-09-20</time>
               
             
           </span>
@@ -435,7 +447,6 @@
 <li>闭包就是使用函数作用域来实现块级作用域的效果</li>
 <li>函数执行时所在的作用域在函数<strong>定义时决定</strong></li>
 </ol>
-<a id="more"></a>
 <h3 id="引用数据类型"><a href="#引用数据类型" class="headerlink" title="引用数据类型"></a>引用数据类型</h3><ol>
 <li>函数参数是引用传递</li>
 <li>对象属性修改是修改原引用里属性的值, 对象重新赋值是一个新的引用</li>
@@ -632,12 +643,13 @@
 <p>添加on/off/trigger等接口实现挂载、移除、触发等动作</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PubSubHandler</span></span>&#123;</span><br><span class="line">	<span class="keyword">constructor</span>()&#123;</span><br><span class="line">		<span class="keyword">this</span>.eventPool = &#123;&#125;;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//移除</span></span><br><span class="line">	off(topicName)&#123;</span><br><span class="line">		<span class="keyword">delete</span> <span class="keyword">this</span>.observers[topicName]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//发布</span></span><br><span class="line">	trigger(topicName,...args)&#123;</span><br><span class="line">		<span class="keyword">this</span>.eventPool[topicName] &amp;&amp; </span><br><span class="line">		<span class="keyword">this</span>.eventPool[topicName].forEach(<span class="function"><span class="params">callback</span>=&gt;</span>callback(...args));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//订阅</span></span><br><span class="line">	on(topicName,callback)&#123;</span><br><span class="line">		<span class="keyword">let</span> topic = <span class="keyword">this</span>.eventPool[topicName] ;</span><br><span class="line">		<span class="keyword">if</span>(!topic)&#123;</span><br><span class="line">			<span class="keyword">this</span>.eventPool[topicName] =[]</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">this</span>.eventPool[topicName].push(callback)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="Reduce"><a href="#Reduce" class="headerlink" title="Reduce"></a>Reduce</h2><p>作用是数组中的值组合起来，最终得到一个值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">total, Value, Index, arr</span>))</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">total, Value, Index, arr</span>), <span class="title">initial</span>)</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>total</code>:           必需。初始值, 或者计算结束后的返回值</li>
+<li><code>total</code>:           必需。计算后的返回值, 作为下一次计算的初始值</li>
 <li><code>Value</code>:           必需。当前元素</li>
 <li><code>Index</code>:           可选。当前元素的索引</li>
 <li><code>arr</code>:               可选。当前元素所属的数组对象</li>
+<li><code>initial</code>:       可选。第一次计算<code>total</code>的初始值</li>
 </ul>
 <h2 id="async函数"><a href="#async函数" class="headerlink" title="async函数"></a>async函数</h2><ol>
 <li>该函数返回值是一个 <code>Promise</code></li>
@@ -804,6 +816,120 @@
 <li><p><strong>验证Referer</strong>: 通过验证<code>Referer</code>来判断该请求是否为第三方网站发起的</p>
 </li>
 </ul>
+<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><p>HTTP 协议是个无状态协议，不会保存状态</p>
+<h3 id="GET和POST"><a href="#GET和POST" class="headerlink" title="GET和POST"></a>GET和POST</h3><p><strong>区别</strong>:</p>
+<ol>
+<li><p>Get 请求能缓存，Post 不能</p>
+</li>
+<li><p>Post 相对 Get 安全一点点，因为Get 请求都包含在 URL 里，且会被浏览器保存历史纪录，Post 不会</p>
+<blockquote>
+<p>在抓包的情况下都是一样的</p>
+</blockquote>
+</li>
+<li><p>Post 可以通过 request body来传输比 Get 更多的数据，Get 没有这个技术</p>
+</li>
+<li><p>URL有长度限制，会影响 Get 请求，但是这个长度限制是浏览器规定的，不是 RFC 规定的</p>
+</li>
+<li><p>Post 支持更多的编码类型且不对数据类型限制</p>
+</li>
+</ol>
+<h3 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h3><ul>
+<li><p><strong>2XX</strong>  成功</p>
+<ol>
+<li>200 OK，表示从客户端发来的请求在服务器端被正确处理</li>
+<li>204 No content，表示请求成功，但响应报文不含实体的主体部分</li>
+<li>205 Reset Content，表示请求成功，但响应报文不含实体的主体部分，但是与 204 响应不同在于要求请求方重置内容</li>
+<li>206 Partial Content，进行范围请求</li>
+</ol>
+</li>
+<li><p><strong>3XX</strong>  重定向</p>
+<ol>
+<li>301 moved permanently，永久性重定向，表示资源已被分配了新的 URL</li>
+<li>302 found，临时性重定向，表示资源临时被分配了新的 URL</li>
+<li>303 see other，表示资源存在着另一个 URL，应使用 GET 方法丁香获取资源</li>
+<li>304 not modified，表示服务器允许访问资源，但因发生请求未满足条件的情况</li>
+<li>307 temporary redirect，临时重定向，和302含义类似，但是期望客户端保持请求方法不变向新的地址发出请求</li>
+</ol>
+</li>
+<li><p><strong>4XX</strong>  客服端错误</p>
+<ol>
+<li>400 bad request，请求报文存在语法错误</li>
+<li>401 unauthorized，表示发送的请求需要有通过 HTTP 认证的认证信息</li>
+<li>403 forbidden，表示对请求资源的访问被服务器拒绝</li>
+<li>404 not found，表示在服务器上没有找到请求的资源</li>
+</ol>
+</li>
+<li><p><strong>5XX</strong>  服务端错误</p>
+<ol>
+<li>500 internal sever error，表示服务器端在执行请求时发生了错误</li>
+<li>501 Not Implemented，表示服务器不支持当前请求所需要的某个功能</li>
+<li>503 service unavailable，表明服务器暂时处于超负载或正在停机维护，无法处理请求</li>
+</ol>
+</li>
+</ul>
+<h3 id="HTTP首部"><a href="#HTTP首部" class="headerlink" title="HTTP首部"></a>HTTP首部</h3><table>
+<thead>
+<tr>
+<th>实体字段</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Allow</td>
+<td>资源的正确请求方式</td>
+</tr>
+<tr>
+<td>Content-Encoding</td>
+<td>内容的编码格式</td>
+</tr>
+<tr>
+<td>Content-Language</td>
+<td>内容使用的语言</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>request body 长度</td>
+</tr>
+<tr>
+<td>Content-Location</td>
+<td>返回数据的备用地址</td>
+</tr>
+<tr>
+<td>Content-MD5</td>
+<td>Base64加密格式的内容 MD5检验值</td>
+</tr>
+<tr>
+<td>Content-Range</td>
+<td>内容的位置范围</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>内容的媒体类型</td>
+</tr>
+<tr>
+<td>Expires</td>
+<td>内容的过期时间</td>
+</tr>
+<tr>
+<td>Last_modified</td>
+<td>内容的最后修改时间</td>
+</tr>
+</tbody>
+</table>
+<h2 id="从输入-URL-到页面加载完成的过程"><a href="#从输入-URL-到页面加载完成的过程" class="headerlink" title="从输入 URL 到页面加载完成的过程"></a>从输入 URL 到页面加载完成的过程</h2><ol>
+<li>首先做 DNS 查询，如果这一步做了智能 DNS 解析的话，会提供访问速度最快的 IP 地址回来</li>
+<li>接下来是 TCP 握手，应用层会下发数据给传输层，这里 TCP 协议会指明两端的端口号，然后下发给网络层。网络层中的 IP 协议会确定 IP 地址，并且指示了数据传输中如何跳转路由器。然后包会再被封装到数据链路层的数据帧结构中，最后就是物理层面的传输了</li>
+<li>TCP 握手结束后会进行 TLS 握手，然后就开始正式的传输数据</li>
+<li>数据在进入服务端之前，可能还会先经过负责负载均衡的服务器，它的作用就是将请求合理的分发到多台服务器上，这时假设服务端会响应一个 HTML 文件</li>
+<li>首先浏览器会判断状态码是什么，如果是 200 那就继续解析，如果 400 或 500 的话就会报错，如果 300 的话会进行重定向，这里会有个重定向计数器，避免过多次的重定向，超过次数也会报错</li>
+<li>浏览器开始解析文件，如果是 gzip 格式的话会先解压一下，然后通过文件的编码格式知道该如何去解码文件</li>
+<li>文件解码成功后会正式开始渲染流程，先会根据 HTML 构建 DOM 树，有 CSS 的话会去构建 CSSOM 树。如果遇到 <code>script</code> 标签的话，会判断是否存在 <code>async</code> 或者 <code>defer</code> ，前者会并行进行下载并执行 JS，后者会先下载文件，然后等待 HTML 解析完成后顺序执行，如果以上都没有，就会阻塞住渲染流程直到 JS 执行完毕。遇到文件下载的会去下载文件，这里如果使用 HTTP 2.0 协议的话会极大的提高多图的下载效率。</li>
+<li>初始的 HTML 被完全加载和解析后会触发 <code>DOMContentLoaded</code> 事件</li>
+<li>CSSOM 树和 DOM 树构建完成后会开始生成 Render 树，这一步就是确定页面元素的布局、样式等等诸多方面的东西</li>
+<li>在生成 Render 树的过程中，浏览器就开始调用 GPU 绘制，合成图层，将内容显示在屏幕上了</li>
+</ol>
+<h2 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h2><p>快排的原理如下。随机选取一个数组中的值作为基准值，从左至右取值与基准值对比大小。比基准值小的放数组左边，大的放右边，对比完成后将基准值和第一个比基准值大的值交换位置。然后将数组以基准值的位置分为两部分，继续递归以上操作。</p>
 
       
     </div>
@@ -858,7 +984,7 @@
         <p><span>本文标题: </span><a href="/2018/09/19/知识点整理/">知识点整理</a></p>
         <p><span>文章作者: </span><a href="/" title="访问 无聊大作战 的个人博客">无聊大作战</a></p>
         <p><span>发布时间: </span>2018年09月19日 - 07:09</p>
-        <p><span>最后更新: </span>2018年09月19日 - 07:09</p>
+        <p><span>最后更新: </span>2018年09月20日 - 03:09</p>
         <p><b>转载请注明出处，谢谢！</b></p>
       </div>
       
@@ -1036,7 +1162,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点整理"><span class="nav-text">知识点整理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量提升"><span class="nav-text">变量提升</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域"><span class="nav-text">作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引用数据类型"><span class="nav-text">引用数据类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this"><span class="nav-text">this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原型"><span class="nav-text">原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行上下文"><span class="nav-text">执行上下文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIFE"><span class="nav-text">IIFE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包"><span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深拷贝"><span class="nav-text">深拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防抖"><span class="nav-text">防抖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承"><span class="nav-text">继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#call-apply-bind-区别"><span class="nav-text">call, apply, bind 区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组取最大值"><span class="nav-text">数组取最大值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象"><span class="nav-text">面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#封装"><span class="nav-text">封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承-1"><span class="nav-text">继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多态"><span class="nav-text">多态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式"><span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#观察者模式"><span class="nav-text">观察者模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#订阅发布模式"><span class="nav-text">订阅发布模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reduce"><span class="nav-text">Reduce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#async函数"><span class="nav-text">async函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#defineProperty"><span class="nav-text">defineProperty</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proxy"><span class="nav-text">Proxy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决JS小数不准确的问题"><span class="nav-text">解决JS小数不准确的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#addEventListener"><span class="nav-text">addEventListener</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-loop-执行顺序"><span class="nav-text">Event loop 执行顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地存储"><span class="nav-text">本地存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渲染机制"><span class="nav-text">渲染机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全"><span class="nav-text">安全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XSS"><span class="nav-text">XSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSRF"><span class="nav-text">CSRF</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点整理"><span class="nav-text">知识点整理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量提升"><span class="nav-text">变量提升</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域"><span class="nav-text">作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引用数据类型"><span class="nav-text">引用数据类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this"><span class="nav-text">this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原型"><span class="nav-text">原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行上下文"><span class="nav-text">执行上下文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIFE"><span class="nav-text">IIFE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包"><span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深拷贝"><span class="nav-text">深拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防抖"><span class="nav-text">防抖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承"><span class="nav-text">继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#call-apply-bind-区别"><span class="nav-text">call, apply, bind 区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组取最大值"><span class="nav-text">数组取最大值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象"><span class="nav-text">面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#封装"><span class="nav-text">封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承-1"><span class="nav-text">继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多态"><span class="nav-text">多态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式"><span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#观察者模式"><span class="nav-text">观察者模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#订阅发布模式"><span class="nav-text">订阅发布模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reduce"><span class="nav-text">Reduce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#async函数"><span class="nav-text">async函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#defineProperty"><span class="nav-text">defineProperty</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proxy"><span class="nav-text">Proxy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决JS小数不准确的问题"><span class="nav-text">解决JS小数不准确的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#addEventListener"><span class="nav-text">addEventListener</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-loop-执行顺序"><span class="nav-text">Event loop 执行顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地存储"><span class="nav-text">本地存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渲染机制"><span class="nav-text">渲染机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全"><span class="nav-text">安全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XSS"><span class="nav-text">XSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSRF"><span class="nav-text">CSRF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP"><span class="nav-text">HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GET和POST"><span class="nav-text">GET和POST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态码"><span class="nav-text">状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP首部"><span class="nav-text">HTTP首部</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从输入-URL-到页面加载完成的过程"><span class="nav-text">从输入 URL 到页面加载完成的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快排"><span class="nav-text">快排</span></a></li></ol></li></ol></div>
             
 
           </div>
