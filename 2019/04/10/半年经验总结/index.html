@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.4.1">
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="半年经验总结Vue对象后添加属性使用$set(obj, key, value)添加绑定效果  key的值为string  Vue数据改变后不渲染注意改变数据需要使用 vue 提供的变异方法, 或者 Vue.set">
+<meta name="keywords" content="实战经验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="半年经验总结">
+<meta property="og:url" content="https://consolelog.wang/2019/04/10/半年经验总结/index.html">
+<meta property="og:site_name" content="无聊大作战">
+<meta property="og:description" content="半年经验总结Vue对象后添加属性使用$set(obj, key, value)添加绑定效果  key的值为string  Vue数据改变后不渲染注意改变数据需要使用 vue 提供的变异方法, 或者 Vue.set">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-10T03:09:09.420Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="半年经验总结">
+<meta name="twitter:description" content="半年经验总结Vue对象后添加属性使用$set(obj, key, value)添加绑定效果  key的值为string  Vue数据改变后不渲染注意改变数据需要使用 vue 提供的变异方法, 或者 Vue.set">
+
+
+
+
+
+
+  <link rel="canonical" href="https://consolelog.wang/2019/04/10/半年经验总结/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>半年经验总结 | 无聊大作战</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">无聊大作战</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://consolelog.wang/2019/04/10/半年经验总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="无聊大作战">
+      <meta itemprop="description" content="半路出家，自学前端半年">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无聊大作战">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">半年经验总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-10 11:06:16 / 修改时间：11:09:09" itemprop="dateCreated datePublished" datetime="2019-04-10T11:06:16+08:00">2019-04-10</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/实战经验/" itemprop="url" rel="index"><span itemprop="name">实战经验</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="半年经验总结"><a href="#半年经验总结" class="headerlink" title="半年经验总结"></a>半年经验总结</h1><h2 id="Vue对象后添加属性"><a href="#Vue对象后添加属性" class="headerlink" title="Vue对象后添加属性"></a>Vue对象后添加属性</h2><p>使用<code>$set(obj, key, value)</code>添加绑定效果</p>
+<blockquote>
+<p>key的值为<code>string</code></p>
+</blockquote>
+<h2 id="Vue数据改变后不渲染"><a href="#Vue数据改变后不渲染" class="headerlink" title="Vue数据改变后不渲染"></a>Vue数据改变后不渲染</h2><p>注意改变数据需要使用 <code>vue</code> 提供的变异方法, 或者 <code>Vue.set</code></p>
+<a id="more"></a>
+<h2 id="node-sass安装失败"><a href="#node-sass安装失败" class="headerlink" title="node-sass安装失败"></a>node-sass安装失败</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm set sass_binary_site=https://npm.taobao.org/mirrors/node-sass/</span><br></pre></td></tr></table></figure>
+<h2 id="不生成map文件"><a href="#不生成map文件" class="headerlink" title="不生成map文件"></a>不生成map文件</h2><p>config — index.js     productionSourceMap: false</p>
+<h2 id="font-family"><a href="#font-family" class="headerlink" title="font-family"></a>font-family</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">font-family</span>: "<span class="selector-tag">Helvetica</span> <span class="selector-tag">Neue</span>",<span class="selector-tag">Helvetica</span>,"<span class="selector-tag">PingFang</span> <span class="selector-tag">SC</span>","<span class="selector-tag">Hiragino</span> <span class="selector-tag">Sans</span> <span class="selector-tag">GB</span>","<span class="selector-tag">Microsoft</span> <span class="selector-tag">YaHei</span>","微软雅黑",<span class="selector-tag">Arial</span>,<span class="selector-tag">sans-serif</span>;</span><br><span class="line"><span class="selector-tag">-webkit-font-smoothing</span>: <span class="selector-tag">antialiased</span>;</span><br><span class="line"><span class="selector-tag">-moz-osx-font-smoothing</span>: <span class="selector-tag">grayscale</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="单行省略号"><a href="#单行省略号" class="headerlink" title="单行省略号"></a>单行省略号</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">max-width</span>: 100<span class="selector-tag">px</span>;</span><br><span class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</span><br><span class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</span><br><span class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span></span><br></pre></td></tr></table></figure>
+<h2 id="多行省略号"><a href="#多行省略号" class="headerlink" title="多行省略号"></a>多行省略号</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</span><br><span class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</span><br><span class="line"><span class="selector-tag">display</span>: <span class="selector-tag">-webkit-box</span>;</span><br><span class="line"><span class="selector-tag">-webkit-line-clamp</span>: 1;</span><br><span class="line"><span class="selector-tag">word-break</span>: <span class="selector-tag">break-all</span>;</span><br><span class="line"><span class="comment">/*! autoprefixer: off */</span></span><br><span class="line"><span class="selector-tag">-webkit-box-orient</span>: <span class="selector-tag">vertical</span>;</span><br><span class="line"><span class="comment">/* autoprefixer: on */</span></span><br></pre></td></tr></table></figure>
+<h2 id="保留两位小数"><a href="#保留两位小数" class="headerlink" title="保留两位小数"></a>保留两位小数</h2><p><code>num.toFixed(2)</code></p>
+<h2 id="Vue里使用箭头函数"><a href="#Vue里使用箭头函数" class="headerlink" title="Vue里使用箭头函数"></a>Vue里使用箭头函数</h2><p>需要注意<code>this</code>的指向问题</p>
+<h2 id="chormeADB调试"><a href="#chormeADB调试" class="headerlink" title="chormeADB调试"></a>chormeADB调试</h2><p><code>chrome://inspect</code></p>
+<h2 id="日期转时间戳"><a href="#日期转时间戳" class="headerlink" title="日期转时间戳"></a>日期转时间戳</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> dateNum = <span class="built_in">Date</span>.parse(<span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'str'</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="注意main-js创建实例的时间"><a href="#注意main-js创建实例的时间" class="headerlink" title="注意main.js创建实例的时间"></a>注意main.js创建实例的时间</h2><p>在实例上挂载方法时, 需要在实例创建之前挂载</p>
+<h2 id="金额单位为分"><a href="#金额单位为分" class="headerlink" title="金额单位为分"></a>金额单位为分</h2><p>需要 <code>n * 1000 / 10</code> 来保证精度</p>
+<h2 id="Vue项目静态资源"><a href="#Vue项目静态资源" class="headerlink" title="Vue项目静态资源"></a>Vue项目静态资源</h2><p>放在 <code>static</code> 文件夹中</p>
+<p>动态图片路径 <code>./static/img/xxx</code></p>
+<h2 id="打包后背景图路径错误"><a href="#打包后背景图路径错误" class="headerlink" title="打包后背景图路径错误"></a>打包后背景图路径错误</h2><p>在 build =&gt; utils.js =&gt; <code>return ExtractTextPlugin.extract({})</code> 内添加 <code>publicPath: &#39;../../&#39;</code></p>
+<h2 id="变量名"><a href="#变量名" class="headerlink" title="变量名"></a>变量名</h2><p>命名描述其目的和作用而不是描述它的值</p>
+<h2 id="字体渐变色"><a href="#字体渐变色" class="headerlink" title="字体渐变色"></a>字体渐变色</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.text-gradient</span> &#123;  </span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">color</span>: green;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">10em</span>;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">'微软雅黑'</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">-webkit-gradient</span>(linear, 0 0, 0 bottom, from(rgba(0, 128, 0, 1)), <span class="built_in">to</span>(rgba(51, 51, 51, 1)));</span><br><span class="line">    <span class="attribute">-webkit-background-clip</span>: text;</span><br><span class="line">    <span class="attribute">-webkit-text-fill-color</span>: transparent;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="Router-History模式页面空白"><a href="#Router-History模式页面空白" class="headerlink" title="Router History模式页面空白"></a>Router History模式页面空白</h2><p><code>router.js</code> 配置服务器 <code>base: /路径</code></p>
+<h2 id="img-正方形自适应"><a href="#img-正方形自适应" class="headerlink" title="img 正方形自适应"></a>img 正方形自适应</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0px</span>;</span><br><span class="line">    <span class="attribute">padding-bottom</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span> <span class="selector-tag">img</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="npm设置淘宝源"><a href="#npm设置淘宝源" class="headerlink" title="npm设置淘宝源"></a>npm设置淘宝源</h2><p><code>npm config set registry https://registry.npm.taobao.org</code></p>
+<h2 id="通过component元素-动态绑定自定义组件"><a href="#通过component元素-动态绑定自定义组件" class="headerlink" title="通过component元素 动态绑定自定义组件"></a>通过<code>component</code>元素 动态绑定自定义组件</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"my-component-name"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Vue-绑定事件默认传入实参-event-也可以自己传入-event"><a href="#Vue-绑定事件默认传入实参-event-也可以自己传入-event" class="headerlink" title="Vue 绑定事件默认传入实参 event, 也可以自己传入 $event"></a>Vue 绑定事件默认传入实参 <code>event</code>, 也可以自己传入 <code>$event</code></h2><h2 id="passive-修饰符可提高移动端滚动性能"><a href="#passive-修饰符可提高移动端滚动性能" class="headerlink" title=".passive 修饰符可提高移动端滚动性能"></a>.passive 修饰符可提高移动端滚动性能</h2><blockquote>
+<p>原理: 在添加事件的时候提前告诉浏览器: 不需要阻止默认行为. 减少了浏览器等待运行时间, 从而能更快的响应事件</p>
+</blockquote>
+<h2 id="ul-ol-table-select-内部元素有限制"><a href="#ul-ol-table-select-内部元素有限制" class="headerlink" title="ul, ol, table, select 内部元素有限制"></a>ul, ol, table, select 内部元素有限制</h2><blockquote>
+<p>为了防止自定义组件被作为无效内容提升到外部, 可以在有效元素上使用 <code>:is</code> 来绑定自定义组件</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">is</span>=<span class="string">"my-component-name"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在字符串和单文件中该限制不存在!!</p>
+</blockquote>
+<h2 id="在自定义组件上监听原生事件"><a href="#在自定义组件上监听原生事件" class="headerlink" title="在自定义组件上监听原生事件"></a>在自定义组件上监听原生事件</h2><blockquote>
+<p>使用 <code>.native</code> 修饰符</p>
+</blockquote>
+<h2 id="自定义组件的-v-model"><a href="#自定义组件的-v-model" class="headerlink" title="自定义组件的 v-model"></a>自定义组件的 <code>v-model</code></h2><p>在组件的 <code>model: { prop: &#39;value&#39;, evnet: &#39;change&#39;}</code> 配置 v-model 绑定的值和监听的事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'base-checkbox'</span>, &#123;</span><br><span class="line">  model: &#123;</span><br><span class="line">    prop: <span class="string">'checked'</span>,</span><br><span class="line">    event: <span class="string">'change'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    checked: <span class="built_in">Boolean</span></span><br><span class="line">  &#125;,</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;input</span></span><br><span class="line"><span class="string">      type="checkbox"</span></span><br><span class="line"><span class="string">      v-bind:checked="checked"</span></span><br><span class="line"><span class="string">      v-on:change="$emit('change', $event.target.checked)"</span></span><br><span class="line"><span class="string">    &gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意: model里的prop 仍然需要在 <code>props</code> 里声明</p>
+</blockquote>
+<h2 id="sync-修饰符"><a href="#sync-修饰符" class="headerlink" title=".sync 修饰符"></a><code>.sync</code> 修饰符</h2><ol>
+<li>子组件<code>$emit</code>更新</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$emit(<span class="string">'update:title'</span>, newTitle)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>父组件传递 <code>props</code>(title) 并快捷监听<code>$emit</code><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">text-document</span> <span class="attr">v-bind:title.sync</span>=<span class="string">"doc.title"</span>&gt;</span><span class="tag">&lt;/<span class="name">text-document</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="slot-插槽"><a href="#slot-插槽" class="headerlink" title="slot 插槽"></a>slot 插槽</h2><p>使用自定义组件时, 所有未在 <code>v-slot</code> 具名插槽中的内容都会放到 自定义组件的 <code>slot</code> 标签中</p>
+<blockquote>
+<p>未命名的 <code>slot</code> 标签的 <code>name</code> 属性 默认值为 <code>default</code></p>
+</blockquote>
+<ol>
+<li><p><code>slot</code>标签 使用 <code>name</code>属性 来命名</p>
+</li>
+<li><p>在 <code>slot</code>标签 中的内容就是该插槽的默认值</p>
+</li>
+<li><p>使用 <code>v-slot: xxx</code> 来对应插槽</p>
+</li>
+<li><p>将自定义组件的数据绑定在 <code>slot</code>标签 上, 父组件 <code>v-slot</code> 属性用一个变量名接收 插槽props</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:default</span>=<span class="string">"propName"</span>&gt;</span></span><br><span class="line">	&#123;&#123;propName.value&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>动态插槽名使用 <code>[]</code></p>
+</li>
+<li><p>插槽缩写 <code>#</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> #<span class="attr">default</span>=<span class="string">"slotProp"</span>&gt;</span></span><br><span class="line">	&#123;&#123;slotProp.value&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h2><ol>
+<li><p><code>provide</code> 选项允许我们指定我们想要<strong>提供</strong>给后代组件的数据/方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">provide: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    func: <span class="keyword">this</span>.func,</span><br><span class="line">    info: <span class="keyword">this</span>.info</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 <code>inject</code> 选项来接收指定的我们想要添加在这个实例上的属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inject: [<span class="string">'func'</span>, <span class="string">'info'</span>]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>注入的 <code>数据/方法</code> 是非响应式的</p>
+</blockquote>
+<h2 id="强制更新"><a href="#强制更新" class="headerlink" title="强制更新"></a>强制更新</h2><p><code>$forceuUpdate</code> </p>
+<blockquote>
+<p>它仅仅影响实例本身和插入插槽内容的子组件，而不是所有子组件。</p>
+</blockquote>
+<h2 id="静态内容缓存"><a href="#静态内容缓存" class="headerlink" title="静态内容缓存"></a>静态内容缓存</h2><ol>
+<li><p>在根元素上添加 <code>v-once</code> 属性以确保这些内容只计算一次然后缓存起来</p>
+</li>
+<li><p>使用 <code>v-pre</code> 跳过大量没有指令的节点会加快编译。</p>
+</li>
+</ol>
+<h2 id="vm-nextTick"><a href="#vm-nextTick" class="headerlink" title="vm.$nextTick()"></a>vm.$nextTick()</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="comment">// 界面更新后执行回调函数</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="路由映射相同组件会复用"><a href="#路由映射相同组件会复用" class="headerlink" title="路由映射相同组件会复用"></a>路由映射相同组件会复用</h2><p>如果需要重新触发组件的钩子函数 可以绑定唯一 <code>:key</code> 使组件重新加载</p>
+<h2 id="路由视图命名"><a href="#路由视图命名" class="headerlink" title="路由视图命名"></a>路由视图命名</h2><p>用于同一个页面有多个 <code>router-view</code> 去展示对应的 <code>component</code></p>
+<blockquote>
+<p><code>name</code> 默认值 <code>default</code></p>
+<p><code>component</code> 写成一个对象 <code>component: { name: componentName }</code></p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-view</span> <span class="attr">name</span>=<span class="string">"xx"</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="vm-on-event-callback"><a href="#vm-on-event-callback" class="headerlink" title="vm.$on(event, callback)"></a>vm.$on(event, callback)</h2><p><code>$on</code> 可以监听所有事件, 包括 <code>$emit</code> 触发的自定义事件</p>
+<h2 id="检测数据类型"><a href="#检测数据类型" class="headerlink" title="检测数据类型"></a>检测数据类型</h2><p><code>Object.prototype.toString.call(X).slice(8, -1)</code>  =&gt;  <code>&quot;String&quot;</code></p>
+<h2 id="设置根元素继承特性"><a href="#设置根元素继承特性" class="headerlink" title="设置根元素继承特性"></a>设置根元素继承特性</h2><ol>
+<li><p>组件内<code>inhertAttrs: false</code></p>
+<blockquote>
+<p>这个选项<strong>不影响</strong> <code>class</code> 和 <code>style</code> 绑定。</p>
+</blockquote>
+</li>
+<li><p>其他 <code>html元素</code> 通过 <code>v-bind=&quot;$attrs&quot;</code> 来接收根元素的继承</p>
+</li>
+</ol>
+<h2 id="项目打包优化"><a href="#项目打包优化" class="headerlink" title="项目打包优化"></a>项目打包优化</h2><ol>
+<li>后端开启 <code>gzip</code></li>
+<li><code>npm run build --report</code> 分析包大小</li>
+<li>项目开启 <code>productionGzip</code></li>
+</ol>
+<blockquote>
+<ul>
+<li><code>npm install --save-dev compression-webpack-plugin</code></li>
+<li>package.json 配置 <code>&quot;compression-webpack-plugin&quot;: &quot;^1.1.12&quot;</code></li>
+<li>prod.conf.js  修改 <code>asset</code> =&gt; <code>filename</code></li>
+</ul>
+</blockquote>
+<ol start="4">
+<li>配置 <code>externals</code> 使用CDN加载插件/库</li>
+</ol>
+<blockquote>
+<ul>
+<li>在 <code>base.conf.js</code> 中配置 <code>externals</code> </li>
+<li>引入由<code>import</code> 改为 <code>require(&#39;XXX&#39;)</code></li>
+<li>index页面 <code>script标签</code> 引入 CDN</li>
+</ul>
+</blockquote>
+<ol start="5">
+<li>路由组件懒加载</li>
+</ol>
+<blockquote>
+<p>引入组件由 <code>import</code> 改为 <code>require(&#39;url&#39;)</code></p>
+</blockquote>
+<ol start="6">
+<li>图片懒加载 / 使用 ps 压缩图片</li>
+</ol>
+<h2 id="Linux下-install-报错-EACCES-permission-denied"><a href="#Linux下-install-报错-EACCES-permission-denied" class="headerlink" title="Linux下 install 报错 EACCES: permission denied"></a>Linux下 <code>install</code> 报错 <code>EACCES: permission denied</code></h2><p><code>npm install --unsafe-perm=true --allow-root</code></p>
+<h2 id="JS压缩图片"><a href="#JS压缩图片" class="headerlink" title="JS压缩图片"></a>JS压缩图片</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获得base64</span></span><br><span class="line"><span class="comment">     * @param &#123;Object&#125; obj</span></span><br><span class="line"><span class="comment">     * @param &#123;Number&#125; [obj.width] 图片需要压缩的宽度，高度会跟随调整</span></span><br><span class="line"><span class="comment">     * @param &#123;Number&#125; [obj.quality=0.8] 压缩质量，不压缩为1</span></span><br><span class="line"><span class="comment">     * @param &#123;Function&#125; [obj.before(this, blob, file)] 处理前函数,this指向的是input:file</span></span><br><span class="line"><span class="comment">     * @param &#123;Function&#125; obj.success(obj) 处理后函数</span></span><br><span class="line"><span class="comment">     * @example</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    $.fn.localResizeIMG = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.on(<span class="string">'change'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> file = <span class="keyword">this</span>.files[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">var</span> URL = <span class="built_in">window</span>.URL || <span class="built_in">window</span>.webkitURL;</span><br><span class="line">            <span class="keyword">var</span> blob = URL.createObjectURL(file);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 执行前函数</span></span><br><span class="line">            <span class="keyword">if</span> ($.isFunction(obj.before)) &#123;</span><br><span class="line">                obj.before(<span class="keyword">this</span>, blob, file)</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            _create(blob, file);</span><br><span class="line">            <span class="keyword">this</span>.value = <span class="string">''</span>; <span class="comment">// 清空临时数据</span></span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 生成base64</span></span><br><span class="line"><span class="comment">         * @param blob 通过file获得的二进制</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">_create</span>(<span class="params">blob</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">            img.src = blob;</span><br><span class="line"></span><br><span class="line">            img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//生成比例</span></span><br><span class="line">                <span class="keyword">var</span> w = that.width,</span><br><span class="line">                    h = that.height,</span><br><span class="line">                    scale = w / h;</span><br><span class="line">                w = obj.width || w;</span><br><span class="line">                h = w / scale;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//生成canvas</span></span><br><span class="line">                <span class="keyword">var</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>);</span><br><span class="line">                <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">                $(canvas).attr(&#123;</span><br><span class="line">                    width: w,</span><br><span class="line">                    height: h</span><br><span class="line">                &#125;);</span><br><span class="line">                ctx.drawImage(that, <span class="number">0</span>, <span class="number">0</span>, w, h);</span><br><span class="line"></span><br><span class="line">                <span class="comment">/**</span></span><br><span class="line"><span class="comment">                 * 生成base64</span></span><br><span class="line"><span class="comment">                 * 兼容修复移动设备需要引入mobileBUGFix.js</span></span><br><span class="line"><span class="comment">                 */</span></span><br><span class="line">                <span class="keyword">var</span> base64 = canvas.toDataURL(<span class="string">'image/jpeg'</span>, obj.quality || <span class="number">0.8</span>);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 修复IOS</span></span><br><span class="line">                <span class="keyword">if</span> (navigator.userAgent.match(<span class="regexp">/iphone/i</span>)) &#123;</span><br><span class="line">                    <span class="keyword">var</span> mpImg = <span class="keyword">new</span> MegaPixImage(img);</span><br><span class="line">                    mpImg.render(canvas, &#123;</span><br><span class="line">                        maxWidth: w,</span><br><span class="line">                        maxHeight: h,</span><br><span class="line">                        quality: obj.quality || <span class="number">0.8</span></span><br><span class="line">                    &#125;);</span><br><span class="line">                    base64 = canvas.toDataURL(<span class="string">'image/jpeg'</span>, obj.quality || <span class="number">0.8</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 修复android</span></span><br><span class="line">                <span class="keyword">if</span> (navigator.userAgent.match(<span class="regexp">/Android/i</span>)) &#123;</span><br><span class="line">                    <span class="keyword">var</span> encoder = <span class="keyword">new</span> JPEGEncoder();</span><br><span class="line">                    base64 = encoder.encode(ctx.getImageData(<span class="number">0</span>, <span class="number">0</span>, w, h), obj.quality * <span class="number">100</span> || <span class="number">80</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 生成结果</span></span><br><span class="line">                <span class="keyword">var</span> result = &#123;</span><br><span class="line">                    base64: base64,</span><br><span class="line">                    clearBase64: base64.substr(base64.indexOf(<span class="string">','</span>) + <span class="number">1</span>)</span><br><span class="line">                &#125;;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 执行后函数</span></span><br><span class="line">                obj.success(result);</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 例子</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    $('input:file').localResizeIMG(&#123;</span></span><br><span class="line"><span class="comment">        width: 100,</span></span><br><span class="line"><span class="comment">        quality: 0.1,</span></span><br><span class="line"><span class="comment">        //before: function (that, blob) &#123;&#125;,</span></span><br><span class="line"><span class="comment">        success: function (result) &#123;</span></span><br><span class="line"><span class="comment">            var img = new Image();</span></span><br><span class="line"><span class="comment">            img.src = result.base64;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">            $('body').append(img);</span></span><br><span class="line"><span class="comment">            console.log(result);</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">    &#125;);</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* mobileBUGFix.js  jpeg_encoder_basic.js  for android jpeg压缩质量修复 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">JPEGEncoder</span>(<span class="params">a</span>)</span>&#123;<span class="function"><span class="keyword">function</span> <span class="title">I</span>(<span class="params">a</span>)</span>&#123;<span class="keyword">var</span> c,i,j,k,l,m,n,o,p,b=[<span class="number">16</span>,<span class="number">11</span>,<span class="number">10</span>,<span class="number">16</span>,<span class="number">24</span>,<span class="number">40</span>,<span class="number">51</span>,<span class="number">61</span>,<span class="number">12</span>,<span class="number">12</span>,<span class="number">14</span>,<span class="number">19</span>,<span class="number">26</span>,<span class="number">58</span>,<span class="number">60</span>,<span class="number">55</span>,<span class="number">14</span>,<span class="number">13</span>,<span class="number">16</span>,<span class="number">24</span>,<span class="number">40</span>,<span class="number">57</span>,<span class="number">69</span>,<span class="number">56</span>,<span class="number">14</span>,<span class="number">17</span>,<span class="number">22</span>,<span class="number">29</span>,<span class="number">51</span>,<span class="number">87</span>,<span class="number">80</span>,<span class="number">62</span>,<span class="number">18</span>,<span class="number">22</span>,<span class="number">37</span>,<span class="number">56</span>,<span class="number">68</span>,<span class="number">109</span>,<span class="number">103</span>,<span class="number">77</span>,<span class="number">24</span>,<span class="number">35</span>,<span class="number">55</span>,<span class="number">64</span>,<span class="number">81</span>,<span class="number">104</span>,<span class="number">113</span>,<span class="number">92</span>,<span class="number">49</span>,<span class="number">64</span>,<span class="number">78</span>,<span class="number">87</span>,<span class="number">103</span>,<span class="number">121</span>,<span class="number">120</span>,<span class="number">101</span>,<span class="number">72</span>,<span class="number">92</span>,<span class="number">95</span>,<span class="number">98</span>,<span class="number">112</span>,<span class="number">100</span>,<span class="number">103</span>,<span class="number">99</span>];<span class="keyword">for</span>(c=<span class="number">0</span>;<span class="number">64</span>&gt;c;c++)i=d((b[c]*a+<span class="number">50</span>)/<span class="number">100</span>),<span class="number">1</span>&gt;i?i=<span class="number">1</span>:i&gt;<span class="number">255</span>&amp;&amp;(i=<span class="number">255</span>),e[z[c]]=i;<span class="keyword">for</span>(j=[<span class="number">17</span>,<span class="number">18</span>,<span class="number">24</span>,<span class="number">47</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">18</span>,<span class="number">21</span>,<span class="number">26</span>,<span class="number">66</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">24</span>,<span class="number">26</span>,<span class="number">56</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">47</span>,<span class="number">66</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>],k=<span class="number">0</span>;<span class="number">64</span>&gt;k;k++)l=d((j[k]*a+<span class="number">50</span>)/<span class="number">100</span>),<span class="number">1</span>&gt;l?l=<span class="number">1</span>:l&gt;<span class="number">255</span>&amp;&amp;(l=<span class="number">255</span>),f[z[k]]=l;<span class="keyword">for</span>(m=[<span class="number">1</span>,<span class="number">1.387039845</span>,<span class="number">1.306562965</span>,<span class="number">1.175875602</span>,<span class="number">1</span>,<span class="number">.785694958</span>,<span class="number">.5411961</span>,<span class="number">.275899379</span>],n=<span class="number">0</span>,o=<span class="number">0</span>;<span class="number">8</span>&gt;o;o++)<span class="keyword">for</span>(p=<span class="number">0</span>;<span class="number">8</span>&gt;p;p++)g[n]=<span class="number">1</span>/(<span class="number">8</span>*e[z[n]]*m[o]*m[p]),h[n]=<span class="number">1</span>/(<span class="number">8</span>*f[z[n]]*m[o]*m[p]),n++&#125;<span class="function"><span class="keyword">function</span> <span class="title">J</span>(<span class="params">a,b</span>)</span>&#123;<span class="keyword">var</span> f,g,c=<span class="number">0</span>,d=<span class="number">0</span>,e=<span class="keyword">new</span> <span class="built_in">Array</span>;<span class="keyword">for</span>(f=<span class="number">1</span>;<span class="number">16</span>&gt;=f;f++)&#123;<span class="keyword">for</span>(g=<span class="number">1</span>;g&lt;=a[f];g++)e[b[d]]=[],e[b[d]][<span class="number">0</span>]=c,e[b[d]][<span class="number">1</span>]=f,d++,c++;c*=<span class="number">2</span>&#125;<span class="keyword">return</span> e&#125;<span class="function"><span class="keyword">function</span> <span class="title">K</span>(<span class="params"></span>)</span>&#123;i=J(A,B),j=J(E,F),k=J(C,D),l=J(G,H)&#125;<span class="function"><span class="keyword">function</span> <span class="title">L</span>(<span class="params"></span>)</span>&#123;<span class="keyword">var</span> c,d,e,a=<span class="number">1</span>,b=<span class="number">2</span>;<span class="keyword">for</span>(c=<span class="number">1</span>;<span class="number">15</span>&gt;=c;c++)&#123;<span class="keyword">for</span>(d=a;b&gt;d;d++)n[<span class="number">32767</span>+d]=c,m[<span class="number">32767</span>+d]=[],m[<span class="number">32767</span>+d][<span class="number">1</span>]=c,m[<span class="number">32767</span>+d][<span class="number">0</span>]=d;<span class="keyword">for</span>(e=-(b<span class="number">-1</span>);-a&gt;=e;e++)n[<span class="number">32767</span>+e]=c,m[<span class="number">32767</span>+e]=[],m[<span class="number">32767</span>+e][<span class="number">1</span>]=c,m[<span class="number">32767</span>+e][<span class="number">0</span>]=b<span class="number">-1</span>+e;a&lt;&lt;=<span class="number">1</span>,b&lt;&lt;=<span class="number">1</span>&#125;&#125;<span class="function"><span class="keyword">function</span> <span class="title">M</span>(<span class="params"></span>)</span>&#123;<span class="keyword">for</span>(<span class="keyword">var</span> a=<span class="number">0</span>;<span class="number">256</span>&gt;a;a++)x[a]=<span class="number">19595</span>*a,x[a+<span class="number">256</span>&gt;&gt;<span class="number">0</span>]=<span class="number">38470</span>*a,x[a+<span class="number">512</span>&gt;&gt;<span class="number">0</span>]=<span class="number">7471</span>*a+<span class="number">32768</span>,x[a+<span class="number">768</span>&gt;&gt;<span class="number">0</span>]=<span class="number">-11059</span>*a,x[a+<span class="number">1024</span>&gt;&gt;<span class="number">0</span>]=<span class="number">-21709</span>*a,x[a+<span class="number">1280</span>&gt;&gt;<span class="number">0</span>]=<span class="number">32768</span>*a+<span class="number">8421375</span>,x[a+<span class="number">1536</span>&gt;&gt;<span class="number">0</span>]=<span class="number">-27439</span>*a,x[a+<span class="number">1792</span>&gt;&gt;<span class="number">0</span>]=<span class="number">-5329</span>*a&#125;<span class="function"><span class="keyword">function</span> <span class="title">N</span>(<span class="params">a</span>)</span>&#123;<span class="keyword">for</span>(<span class="keyword">var</span> b=a[<span class="number">0</span>],c=a[<span class="number">1</span>]<span class="number">-1</span>;c&gt;=<span class="number">0</span>;)b&amp;<span class="number">1</span>&lt;&lt;c&amp;&amp;(r|=<span class="number">1</span>&lt;&lt;s),c--,s--,<span class="number">0</span>&gt;s&amp;&amp;(<span class="number">255</span>==r?(O(<span class="number">255</span>),O(<span class="number">0</span>)):O(r),s=<span class="number">7</span>,r=<span class="number">0</span>)&#125;<span class="function"><span class="keyword">function</span> <span class="title">O</span>(<span class="params">a</span>)</span>&#123;q.push(w[a])&#125;<span class="function"><span class="keyword">function</span> <span class="title">P</span>(<span class="params">a</span>)</span>&#123;O(<span class="number">255</span>&amp;a&gt;&gt;<span class="number">8</span>),O(<span class="number">255</span>&amp;a)&#125;<span class="function"><span class="keyword">function</span> <span class="title">Q</span>(<span class="params">a,b</span>)</span>&#123;<span class="keyword">var</span> c,d,e,f,g,h,i,j,l,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,$,_,k=<span class="number">0</span>;<span class="keyword">const</span> m=<span class="number">8</span>,n=<span class="number">64</span>;<span class="keyword">for</span>(l=<span class="number">0</span>;m&gt;l;++l)c=a[k],d=a[k+<span class="number">1</span>],e=a[k+<span class="number">2</span>],f=a[k+<span class="number">3</span>],g=a[k+<span class="number">4</span>],h=a[k+<span class="number">5</span>],i=a[k+<span class="number">6</span>],j=a[k+<span class="number">7</span>],p=c+j,q=c-j,r=d+i,s=d-i,t=e+h,u=e-h,v=f+g,w=f-g,x=p+v,y=p-v,z=r+t,A=r-t,a[k]=x+z,a[k+<span class="number">4</span>]=x-z,B=<span class="number">.707106781</span>*(A+y),a[k+<span class="number">2</span>]=y+B,a[k+<span class="number">6</span>]=y-B,x=w+u,z=u+s,A=s+q,C=<span class="number">.382683433</span>*(x-A),D=<span class="number">.5411961</span>*x+C,E=<span class="number">1.306562965</span>*A+C,F=<span class="number">.707106781</span>*z,G=q+F,H=q-F,a[k+<span class="number">5</span>]=H+D,a[k+<span class="number">3</span>]=H-D,a[k+<span class="number">1</span>]=G+E,a[k+<span class="number">7</span>]=G-E,k+=<span class="number">8</span>;<span class="keyword">for</span>(k=<span class="number">0</span>,l=<span class="number">0</span>;m&gt;l;++l)c=a[k],d=a[k+<span class="number">8</span>],e=a[k+<span class="number">16</span>],f=a[k+<span class="number">24</span>],g=a[k+<span class="number">32</span>],h=a[k+<span class="number">40</span>],i=a[k+<span class="number">48</span>],j=a[k+<span class="number">56</span>],I=c+j,J=c-j,K=d+i,L=d-i,M=e+h,N=e-h,O=f+g,P=f-g,Q=I+O,R=I-O,S=K+M,T=K-M,a[k]=Q+S,a[k+<span class="number">32</span>]=Q-S,U=<span class="number">.707106781</span>*(T+R),a[k+<span class="number">16</span>]=R+U,a[k+<span class="number">48</span>]=R-U,Q=P+N,S=N+L,T=L+J,V=<span class="number">.382683433</span>*(Q-T),W=<span class="number">.5411961</span>*Q+V,X=<span class="number">1.306562965</span>*T+V,Y=<span class="number">.707106781</span>*S,Z=J+Y,$=J-Y,a[k+<span class="number">40</span>]=$+W,a[k+<span class="number">24</span>]=$-W,a[k+<span class="number">8</span>]=Z+X,a[k+<span class="number">56</span>]=Z-X,k++;<span class="keyword">for</span>(l=<span class="number">0</span>;n&gt;l;++l)_=a[l]*b[l],o[l]=_&gt;<span class="number">0</span>?<span class="number">0</span>|_+<span class="number">.5</span>:<span class="number">0</span>|_<span class="number">-.5</span>;<span class="keyword">return</span> o&#125;<span class="function"><span class="keyword">function</span> <span class="title">R</span>(<span class="params"></span>)</span>&#123;P(<span class="number">65504</span>),P(<span class="number">16</span>),O(<span class="number">74</span>),O(<span class="number">70</span>),O(<span class="number">73</span>),O(<span class="number">70</span>),O(<span class="number">0</span>),O(<span class="number">1</span>),O(<span class="number">1</span>),O(<span class="number">0</span>),P(<span class="number">1</span>),P(<span class="number">1</span>),O(<span class="number">0</span>),O(<span class="number">0</span>)&#125;<span class="function"><span class="keyword">function</span> <span class="title">S</span>(<span class="params">a,b</span>)</span>&#123;P(<span class="number">65472</span>),P(<span class="number">17</span>),O(<span class="number">8</span>),P(b),P(a),O(<span class="number">3</span>),O(<span class="number">1</span>),O(<span class="number">17</span>),O(<span class="number">0</span>),O(<span class="number">2</span>),O(<span class="number">17</span>),O(<span class="number">1</span>),O(<span class="number">3</span>),O(<span class="number">17</span>),O(<span class="number">1</span>)&#125;<span class="function"><span class="keyword">function</span> <span class="title">T</span>(<span class="params"></span>)</span>&#123;<span class="keyword">var</span> a,b;<span class="keyword">for</span>(P(<span class="number">65499</span>),P(<span class="number">132</span>),O(<span class="number">0</span>),a=<span class="number">0</span>;<span class="number">64</span>&gt;a;a++)O(e[a]);<span class="keyword">for</span>(O(<span class="number">1</span>),b=<span class="number">0</span>;<span class="number">64</span>&gt;b;b++)O(f[b])&#125;<span class="function"><span class="keyword">function</span> <span class="title">U</span>(<span class="params"></span>)</span>&#123;<span class="keyword">var</span> a,b,c,d,e,f,g,h;<span class="keyword">for</span>(P(<span class="number">65476</span>),P(<span class="number">418</span>),O(<span class="number">0</span>),a=<span class="number">0</span>;<span class="number">16</span>&gt;a;a++)O(A[a+<span class="number">1</span>]);<span class="keyword">for</span>(b=<span class="number">0</span>;<span class="number">11</span>&gt;=b;b++)O(B[b]);<span class="keyword">for</span>(O(<span class="number">16</span>),c=<span class="number">0</span>;<span class="number">16</span>&gt;c;c++)O(C[c+<span class="number">1</span>]);<span class="keyword">for</span>(d=<span class="number">0</span>;<span class="number">161</span>&gt;=d;d++)O(D[d]);<span class="keyword">for</span>(O(<span class="number">1</span>),e=<span class="number">0</span>;<span class="number">16</span>&gt;e;e++)O(E[e+<span class="number">1</span>]);<span class="keyword">for</span>(f=<span class="number">0</span>;<span class="number">11</span>&gt;=f;f++)O(F[f]);<span class="keyword">for</span>(O(<span class="number">17</span>),g=<span class="number">0</span>;<span class="number">16</span>&gt;g;g++)O(G[g+<span class="number">1</span>]);<span class="keyword">for</span>(h=<span class="number">0</span>;<span class="number">161</span>&gt;=h;h++)O(H[h])&#125;<span class="function"><span class="keyword">function</span> <span class="title">V</span>(<span class="params"></span>)</span>&#123;P(<span class="number">65498</span>),P(<span class="number">12</span>),O(<span class="number">3</span>),O(<span class="number">1</span>),O(<span class="number">0</span>),O(<span class="number">2</span>),O(<span class="number">17</span>),O(<span class="number">3</span>),O(<span class="number">17</span>),O(<span class="number">0</span>),O(<span class="number">63</span>),O(<span class="number">0</span>)&#125;<span class="function"><span class="keyword">function</span> <span class="title">W</span>(<span class="params">a,b,c,d,e</span>)</span>&#123;<span class="keyword">var</span> h,l,o,q,r,s,t,u,v,w,f=e[<span class="number">0</span>],g=e[<span class="number">240</span>];<span class="keyword">const</span> i=<span class="number">16</span>,j=<span class="number">63</span>,k=<span class="number">64</span>;<span class="keyword">for</span>(l=Q(a,b),o=<span class="number">0</span>;k&gt;o;++o)p[z[o]]=l[o];<span class="keyword">for</span>(q=p[<span class="number">0</span>]-c,c=p[<span class="number">0</span>],<span class="number">0</span>==q?N(d[<span class="number">0</span>]):(h=<span class="number">32767</span>+q,N(d[n[h]]),N(m[h])),r=<span class="number">63</span>;r&gt;<span class="number">0</span>&amp;&amp;<span class="number">0</span>==p[r];r--);<span class="keyword">if</span>(<span class="number">0</span>==r)<span class="keyword">return</span> N(f),c;<span class="keyword">for</span>(s=<span class="number">1</span>;r&gt;=s;)&#123;<span class="keyword">for</span>(u=s;<span class="number">0</span>==p[s]&amp;&amp;r&gt;=s;++s);<span class="keyword">if</span>(v=s-u,v&gt;=i)&#123;<span class="keyword">for</span>(t=v&gt;&gt;<span class="number">4</span>,w=<span class="number">1</span>;t&gt;=w;++w)N(g);v=<span class="number">15</span>&amp;v&#125;h=<span class="number">32767</span>+p[s],N(e[(v&lt;&lt;<span class="number">4</span>)+n[h]]),N(m[h]),s++&#125;<span class="keyword">return</span> r!=j&amp;&amp;N(f),c&#125;<span class="function"><span class="keyword">function</span> <span class="title">X</span>(<span class="params"></span>)</span>&#123;<span class="keyword">var</span> b,a=<span class="built_in">String</span>.fromCharCode;<span class="keyword">for</span>(b=<span class="number">0</span>;<span class="number">256</span>&gt;b;b++)w[b]=a(b)&#125;<span class="function"><span class="keyword">function</span> <span class="title">Y</span>(<span class="params">a</span>)</span>&#123;<span class="keyword">if</span>(<span class="number">0</span>&gt;=a&amp;&amp;(a=<span class="number">1</span>),a&gt;<span class="number">100</span>&amp;&amp;(a=<span class="number">100</span>),y!=a)&#123;<span class="keyword">var</span> b=<span class="number">0</span>;b=<span class="number">50</span>&gt;a?<span class="built_in">Math</span>.floor(<span class="number">5e3</span>/a):<span class="built_in">Math</span>.floor(<span class="number">200</span><span class="number">-2</span>*a),I(b),y=a,<span class="built_in">console</span>.log(<span class="string">"Quality set to: "</span>+a+<span class="string">"%"</span>)&#125;&#125;<span class="function"><span class="keyword">function</span> <span class="title">Z</span>(<span class="params"></span>)</span>&#123;<span class="keyword">var</span> c,b=(<span class="keyword">new</span> <span class="built_in">Date</span>).getTime();a||(a=<span class="number">50</span>),X(),K(),L(),M(),Y(a),c=(<span class="keyword">new</span> <span class="built_in">Date</span>).getTime()-b,<span class="built_in">console</span>.log(<span class="string">"Initialization "</span>+c+<span class="string">"ms"</span>)&#125;<span class="keyword">var</span> d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H;<span class="built_in">Math</span>.round,d=<span class="built_in">Math</span>.floor,e=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">64</span>),f=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">64</span>),g=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">64</span>),h=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">64</span>),m=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">65535</span>),n=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">65535</span>),o=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">64</span>),p=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">64</span>),q=[],r=<span class="number">0</span>,s=<span class="number">7</span>,t=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">64</span>),u=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">64</span>),v=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">64</span>),w=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">256</span>),x=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">2048</span>),z=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">14</span>,<span class="number">15</span>,<span class="number">27</span>,<span class="number">28</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">13</span>,<span class="number">16</span>,<span class="number">26</span>,<span class="number">29</span>,<span class="number">42</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">12</span>,<span class="number">17</span>,<span class="number">25</span>,<span class="number">30</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">9</span>,<span class="number">11</span>,<span class="number">18</span>,<span class="number">24</span>,<span class="number">31</span>,<span class="number">40</span>,<span class="number">44</span>,<span class="number">53</span>,<span class="number">10</span>,<span class="number">19</span>,<span class="number">23</span>,<span class="number">32</span>,<span class="number">39</span>,<span class="number">45</span>,<span class="number">52</span>,<span class="number">54</span>,<span class="number">20</span>,<span class="number">22</span>,<span class="number">33</span>,<span class="number">38</span>,<span class="number">46</span>,<span class="number">51</span>,<span class="number">55</span>,<span class="number">60</span>,<span class="number">21</span>,<span class="number">34</span>,<span class="number">37</span>,<span class="number">47</span>,<span class="number">50</span>,<span class="number">56</span>,<span class="number">59</span>,<span class="number">61</span>,<span class="number">35</span>,<span class="number">36</span>,<span class="number">48</span>,<span class="number">49</span>,<span class="number">57</span>,<span class="number">58</span>,<span class="number">62</span>,<span class="number">63</span>],A=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],B=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>],C=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">125</span>],D=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">4</span>,<span class="number">17</span>,<span class="number">5</span>,<span class="number">18</span>,<span class="number">33</span>,<span class="number">49</span>,<span class="number">65</span>,<span class="number">6</span>,<span class="number">19</span>,<span class="number">81</span>,<span class="number">97</span>,<span class="number">7</span>,<span class="number">34</span>,<span class="number">113</span>,<span class="number">20</span>,<span class="number">50</span>,<span class="number">129</span>,<span class="number">145</span>,<span class="number">161</span>,<span class="number">8</span>,<span class="number">35</span>,<span class="number">66</span>,<span class="number">177</span>,<span class="number">193</span>,<span class="number">21</span>,<span class="number">82</span>,<span class="number">209</span>,<span class="number">240</span>,<span class="number">36</span>,<span class="number">51</span>,<span class="number">98</span>,<span class="number">114</span>,<span class="number">130</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">24</span>,<span class="number">25</span>,<span class="number">26</span>,<span class="number">37</span>,<span class="number">38</span>,<span class="number">39</span>,<span class="number">40</span>,<span class="number">41</span>,<span class="number">42</span>,<span class="number">52</span>,<span class="number">53</span>,<span class="number">54</span>,<span class="number">55</span>,<span class="number">56</span>,<span class="number">57</span>,<span class="number">58</span>,<span class="number">67</span>,<span class="number">68</span>,<span class="number">69</span>,<span class="number">70</span>,<span class="number">71</span>,<span class="number">72</span>,<span class="number">73</span>,<span class="number">74</span>,<span class="number">83</span>,<span class="number">84</span>,<span class="number">85</span>,<span class="number">86</span>,<span class="number">87</span>,<span class="number">88</span>,<span class="number">89</span>,<span class="number">90</span>,<span class="number">99</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">102</span>,<span class="number">103</span>,<span class="number">104</span>,<span class="number">105</span>,<span class="number">106</span>,<span class="number">115</span>,<span class="number">116</span>,<span class="number">117</span>,<span class="number">118</span>,<span class="number">119</span>,<span class="number">120</span>,<span class="number">121</span>,<span class="number">122</span>,<span class="number">131</span>,<span class="number">132</span>,<span class="number">133</span>,<span class="number">134</span>,<span class="number">135</span>,<span class="number">136</span>,<span class="number">137</span>,<span class="number">138</span>,<span class="number">146</span>,<span class="number">147</span>,<span class="number">148</span>,<span class="number">149</span>,<span class="number">150</span>,<span class="number">151</span>,<span class="number">152</span>,<span class="number">153</span>,<span class="number">154</span>,<span class="number">162</span>,<span class="number">163</span>,<span class="number">164</span>,<span class="number">165</span>,<span class="number">166</span>,<span class="number">167</span>,<span class="number">168</span>,<span class="number">169</span>,<span class="number">170</span>,<span class="number">178</span>,<span class="number">179</span>,<span class="number">180</span>,<span class="number">181</span>,<span class="number">182</span>,<span class="number">183</span>,<span class="number">184</span>,<span class="number">185</span>,<span class="number">186</span>,<span class="number">194</span>,<span class="number">195</span>,<span class="number">196</span>,<span class="number">197</span>,<span class="number">198</span>,<span class="number">199</span>,<span class="number">200</span>,<span class="number">201</span>,<span class="number">202</span>,<span class="number">210</span>,<span class="number">211</span>,<span class="number">212</span>,<span class="number">213</span>,<span class="number">214</span>,<span class="number">215</span>,<span class="number">216</span>,<span class="number">217</span>,<span class="number">218</span>,<span class="number">225</span>,<span class="number">226</span>,<span class="number">227</span>,<span class="number">228</span>,<span class="number">229</span>,<span class="number">230</span>,<span class="number">231</span>,<span class="number">232</span>,<span class="number">233</span>,<span class="number">234</span>,<span class="number">241</span>,<span class="number">242</span>,<span class="number">243</span>,<span class="number">244</span>,<span class="number">245</span>,<span class="number">246</span>,<span class="number">247</span>,<span class="number">248</span>,<span class="number">249</span>,<span class="number">250</span>],E=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],F=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>],G=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">119</span>],H=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">17</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">33</span>,<span class="number">49</span>,<span class="number">6</span>,<span class="number">18</span>,<span class="number">65</span>,<span class="number">81</span>,<span class="number">7</span>,<span class="number">97</span>,<span class="number">113</span>,<span class="number">19</span>,<span class="number">34</span>,<span class="number">50</span>,<span class="number">129</span>,<span class="number">8</span>,<span class="number">20</span>,<span class="number">66</span>,<span class="number">145</span>,<span class="number">161</span>,<span class="number">177</span>,<span class="number">193</span>,<span class="number">9</span>,<span class="number">35</span>,<span class="number">51</span>,<span class="number">82</span>,<span class="number">240</span>,<span class="number">21</span>,<span class="number">98</span>,<span class="number">114</span>,<span class="number">209</span>,<span class="number">10</span>,<span class="number">22</span>,<span class="number">36</span>,<span class="number">52</span>,<span class="number">225</span>,<span class="number">37</span>,<span class="number">241</span>,<span class="number">23</span>,<span class="number">24</span>,<span class="number">25</span>,<span class="number">26</span>,<span class="number">38</span>,<span class="number">39</span>,<span class="number">40</span>,<span class="number">41</span>,<span class="number">42</span>,<span class="number">53</span>,<span class="number">54</span>,<span class="number">55</span>,<span class="number">56</span>,<span class="number">57</span>,<span class="number">58</span>,<span class="number">67</span>,<span class="number">68</span>,<span class="number">69</span>,<span class="number">70</span>,<span class="number">71</span>,<span class="number">72</span>,<span class="number">73</span>,<span class="number">74</span>,<span class="number">83</span>,<span class="number">84</span>,<span class="number">85</span>,<span class="number">86</span>,<span class="number">87</span>,<span class="number">88</span>,<span class="number">89</span>,<span class="number">90</span>,<span class="number">99</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">102</span>,<span class="number">103</span>,<span class="number">104</span>,<span class="number">105</span>,<span class="number">106</span>,<span class="number">115</span>,<span class="number">116</span>,<span class="number">117</span>,<span class="number">118</span>,<span class="number">119</span>,<span class="number">120</span>,<span class="number">121</span>,<span class="number">122</span>,<span class="number">130</span>,<span class="number">131</span>,<span class="number">132</span>,<span class="number">133</span>,<span class="number">134</span>,<span class="number">135</span>,<span class="number">136</span>,<span class="number">137</span>,<span class="number">138</span>,<span class="number">146</span>,<span class="number">147</span>,<span class="number">148</span>,<span class="number">149</span>,<span class="number">150</span>,<span class="number">151</span>,<span class="number">152</span>,<span class="number">153</span>,<span class="number">154</span>,<span class="number">162</span>,<span class="number">163</span>,<span class="number">164</span>,<span class="number">165</span>,<span class="number">166</span>,<span class="number">167</span>,<span class="number">168</span>,<span class="number">169</span>,<span class="number">170</span>,<span class="number">178</span>,<span class="number">179</span>,<span class="number">180</span>,<span class="number">181</span>,<span class="number">182</span>,<span class="number">183</span>,<span class="number">184</span>,<span class="number">185</span>,<span class="number">186</span>,<span class="number">194</span>,<span class="number">195</span>,<span class="number">196</span>,<span class="number">197</span>,<span class="number">198</span>,<span class="number">199</span>,<span class="number">200</span>,<span class="number">201</span>,<span class="number">202</span>,<span class="number">210</span>,<span class="number">211</span>,<span class="number">212</span>,<span class="number">213</span>,<span class="number">214</span>,<span class="number">215</span>,<span class="number">216</span>,<span class="number">217</span>,<span class="number">218</span>,<span class="number">226</span>,<span class="number">227</span>,<span class="number">228</span>,<span class="number">229</span>,<span class="number">230</span>,<span class="number">231</span>,<span class="number">232</span>,<span class="number">233</span>,<span class="number">234</span>,<span class="number">242</span>,<span class="number">243</span>,<span class="number">244</span>,<span class="number">245</span>,<span class="number">246</span>,<span class="number">247</span>,<span class="number">248</span>,<span class="number">249</span>,<span class="number">250</span>],<span class="keyword">this</span>.encode=<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;<span class="keyword">var</span> d,e,f,m,n,o,p,y,z,A,B,C,D,E,F,G,H,I,J,K,c=(<span class="keyword">new</span> <span class="built_in">Date</span>).getTime();<span class="keyword">for</span>(b&amp;&amp;Y(b),q=<span class="keyword">new</span> <span class="built_in">Array</span>,r=<span class="number">0</span>,s=<span class="number">7</span>,P(<span class="number">65496</span>),R(),T(),S(a.width,a.height),U(),V(),d=<span class="number">0</span>,e=<span class="number">0</span>,f=<span class="number">0</span>,r=<span class="number">0</span>,s=<span class="number">7</span>,<span class="keyword">this</span>.encode.displayName=<span class="string">"_encode_"</span>,m=a.data,n=a.width,o=a.height,p=<span class="number">4</span>*n,z=<span class="number">0</span>;o&gt;z;)&#123;<span class="keyword">for</span>(y=<span class="number">0</span>;p&gt;y;)&#123;<span class="keyword">for</span>(D=p*z+y,E=D,F=<span class="number">-1</span>,G=<span class="number">0</span>,H=<span class="number">0</span>;<span class="number">64</span>&gt;H;H++)G=H&gt;&gt;<span class="number">3</span>,F=<span class="number">4</span>*(<span class="number">7</span>&amp;H),E=D+G*p+F,z+G&gt;=o&amp;&amp;(E-=p*(z+<span class="number">1</span>+G-o)),y+F&gt;=p&amp;&amp;(E-=y+F-p+<span class="number">4</span>),A=m[E++],B=m[E++],C=m[E++],t[H]=(x[A]+x[B+<span class="number">256</span>&gt;&gt;<span class="number">0</span>]+x[C+<span class="number">512</span>&gt;&gt;<span class="number">0</span>]&gt;&gt;<span class="number">16</span>)<span class="number">-128</span>,u[H]=(x[A+<span class="number">768</span>&gt;&gt;<span class="number">0</span>]+x[B+<span class="number">1024</span>&gt;&gt;<span class="number">0</span>]+x[C+<span class="number">1280</span>&gt;&gt;<span class="number">0</span>]&gt;&gt;<span class="number">16</span>)<span class="number">-128</span>,v[H]=(x[A+<span class="number">1280</span>&gt;&gt;<span class="number">0</span>]+x[B+<span class="number">1536</span>&gt;&gt;<span class="number">0</span>]+x[C+<span class="number">1792</span>&gt;&gt;<span class="number">0</span>]&gt;&gt;<span class="number">16</span>)<span class="number">-128</span>;d=W(t,g,d,i,k),e=W(u,h,e,j,l),f=W(v,h,f,j,l),y+=<span class="number">32</span>&#125;z+=<span class="number">8</span>&#125;<span class="keyword">return</span> s&gt;=<span class="number">0</span>&amp;&amp;(I=[],I[<span class="number">1</span>]=s+<span class="number">1</span>,I[<span class="number">0</span>]=(<span class="number">1</span>&lt;&lt;s+<span class="number">1</span>)<span class="number">-1</span>,N(I)),P(<span class="number">65497</span>),J=<span class="string">"data:image/jpeg;base64,"</span>+btoa(q.join(<span class="string">""</span>)),q=[],K=(<span class="keyword">new</span> <span class="built_in">Date</span>).getTime()-c,<span class="built_in">console</span>.log(<span class="string">"Encoding time: "</span>+K+<span class="string">"ms"</span>),J&#125;,Z()&#125;<span class="function"><span class="keyword">function</span> <span class="title">getImageDataFromImage</span>(<span class="params">a</span>)</span>&#123;<span class="keyword">var</span> d,b=<span class="string">"string"</span>==<span class="keyword">typeof</span> a?<span class="built_in">document</span>.getElementById(a):a,c=<span class="built_in">document</span>.createElement(<span class="string">"canvas"</span>);<span class="keyword">return</span> c.width=b.width,c.height=b.height,d=c.getContext(<span class="string">"2d"</span>),d.drawImage(b,<span class="number">0</span>,<span class="number">0</span>),d.getImageData(<span class="number">0</span>,<span class="number">0</span>,c.width,c.height)&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* megapix-image.js for IOS(iphone5+) drawImage画面扭曲修复  */</span></span><br><span class="line">!<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">a</span>)</span>&#123;<span class="keyword">var</span> d,e,b=a.naturalWidth,c=a.naturalHeight;<span class="keyword">return</span> b*c&gt;<span class="number">1048576</span>?(d=<span class="built_in">document</span>.createElement(<span class="string">"canvas"</span>),d.width=d.height=<span class="number">1</span>,e=d.getContext(<span class="string">"2d"</span>),e.drawImage(a,-b+<span class="number">1</span>,<span class="number">0</span>),<span class="number">0</span>===e.getImageData(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>).data[<span class="number">3</span>]):!<span class="number">1</span>&#125;<span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params">a,b,c</span>)</span>&#123;<span class="keyword">var</span> e,f,g,h,i,j,k,d=<span class="built_in">document</span>.createElement(<span class="string">"canvas"</span>);<span class="keyword">for</span>(d.width=<span class="number">1</span>,d.height=c,e=d.getContext(<span class="string">"2d"</span>),e.drawImage(a,<span class="number">0</span>,<span class="number">0</span>),f=e.getImageData(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,c).data,g=<span class="number">0</span>,h=c,i=c;i&gt;g;)j=f[<span class="number">4</span>*(i<span class="number">-1</span>)+<span class="number">3</span>],<span class="number">0</span>===j?h=i:g=i,i=h+g&gt;&gt;<span class="number">1</span>;<span class="keyword">return</span> k=i/c,<span class="number">0</span>===k?<span class="number">1</span>:k&#125;<span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params">a,b,c</span>)</span>&#123;<span class="keyword">var</span> e=<span class="built_in">document</span>.createElement(<span class="string">"canvas"</span>);<span class="keyword">return</span> d(a,e,b,c),e.toDataURL(<span class="string">"image/jpeg"</span>,b.quality||<span class="number">.8</span>)&#125;<span class="function"><span class="keyword">function</span> <span class="title">d</span>(<span class="params">c,d,f,g</span>)</span>&#123;<span class="keyword">var</span> m,n,o,p,q,r,s,t,u,v,w,h=c.naturalWidth,i=c.naturalHeight,j=f.width,k=f.height,l=d.getContext(<span class="string">"2d"</span>);<span class="keyword">for</span>(l.save(),e(d,l,j,k,f.orientation),m=a(c),m&amp;&amp;(h/=<span class="number">2</span>,i/=<span class="number">2</span>),n=<span class="number">1024</span>,o=<span class="built_in">document</span>.createElement(<span class="string">"canvas"</span>),o.width=o.height=n,p=o.getContext(<span class="string">"2d"</span>),q=g?b(c,h,i):<span class="number">1</span>,r=<span class="built_in">Math</span>.ceil(n*j/h),s=<span class="built_in">Math</span>.ceil(n*k/i/q),t=<span class="number">0</span>,u=<span class="number">0</span>;i&gt;t;)&#123;<span class="keyword">for</span>(v=<span class="number">0</span>,w=<span class="number">0</span>;h&gt;v;)p.clearRect(<span class="number">0</span>,<span class="number">0</span>,n,n),p.drawImage(c,-v,-t),l.drawImage(o,<span class="number">0</span>,<span class="number">0</span>,n,n,w,u,r,s),v+=n,w+=r;t+=n,u+=s&#125;l.restore(),o=p=<span class="literal">null</span>&#125;<span class="function"><span class="keyword">function</span> <span class="title">e</span>(<span class="params">a,b,c,d,e</span>)</span>&#123;<span class="keyword">switch</span>(e)&#123;<span class="keyword">case</span> <span class="number">5</span>:<span class="keyword">case</span> <span class="number">6</span>:<span class="keyword">case</span> <span class="number">7</span>:<span class="keyword">case</span> <span class="number">8</span>:a.width=d,a.height=c;<span class="keyword">break</span>;<span class="keyword">default</span>:a.width=c,a.height=d&#125;<span class="keyword">switch</span>(e)&#123;<span class="keyword">case</span> <span class="number">2</span>:b.translate(c,<span class="number">0</span>),b.scale(<span class="number">-1</span>,<span class="number">1</span>);<span class="keyword">break</span>;<span class="keyword">case</span> <span class="number">3</span>:b.translate(c,d),b.rotate(<span class="built_in">Math</span>.PI);<span class="keyword">break</span>;<span class="keyword">case</span> <span class="number">4</span>:b.translate(<span class="number">0</span>,d),b.scale(<span class="number">1</span>,<span class="number">-1</span>);<span class="keyword">break</span>;<span class="keyword">case</span> <span class="number">5</span>:b.rotate(<span class="number">.5</span>*<span class="built_in">Math</span>.PI),b.scale(<span class="number">1</span>,<span class="number">-1</span>);<span class="keyword">break</span>;<span class="keyword">case</span> <span class="number">6</span>:b.rotate(<span class="number">.5</span>*<span class="built_in">Math</span>.PI),b.translate(<span class="number">0</span>,-d);<span class="keyword">break</span>;<span class="keyword">case</span> <span class="number">7</span>:b.rotate(<span class="number">.5</span>*<span class="built_in">Math</span>.PI),b.translate(c,-d),b.scale(<span class="number">-1</span>,<span class="number">1</span>);<span class="keyword">break</span>;<span class="keyword">case</span> <span class="number">8</span>:b.rotate(<span class="number">-.5</span>*<span class="built_in">Math</span>.PI),b.translate(-c,<span class="number">0</span>)&#125;&#125;<span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">a</span>)</span>&#123;<span class="keyword">var</span> b,c,d;<span class="keyword">if</span>(<span class="built_in">window</span>.Blob&amp;&amp;a <span class="keyword">instanceof</span> Blob)&#123;<span class="keyword">if</span>(b=<span class="keyword">new</span> Image,c=<span class="built_in">window</span>.URL&amp;&amp;<span class="built_in">window</span>.URL.createObjectURL?<span class="built_in">window</span>.URL:<span class="built_in">window</span>.webkitURL&amp;&amp;<span class="built_in">window</span>.webkitURL.createObjectURL?<span class="built_in">window</span>.webkitURL:<span class="literal">null</span>,!c)<span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">"No createObjectURL function found to create blob url"</span>);b.src=c.createObjectURL(a),<span class="keyword">this</span>.blob=a,a=b&#125;a.naturalWidth||a.naturalHeight||(d=<span class="keyword">this</span>,a.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">var</span> b,c,a=d.imageLoadListeners;<span class="keyword">if</span>(a)<span class="keyword">for</span>(d.imageLoadListeners=<span class="literal">null</span>,b=<span class="number">0</span>,c=a.length;c&gt;b;b++)a[b]()&#125;,<span class="keyword">this</span>.imageLoadListeners=[]),<span class="keyword">this</span>.srcImage=a&#125;f.prototype.render=<span class="function"><span class="keyword">function</span>(<span class="params">a,b,e</span>)</span>&#123;<span class="keyword">var</span> f,g,h,i,j,k,l,m,n,o,p;<span class="keyword">if</span>(<span class="keyword">this</span>.imageLoadListeners)<span class="keyword">return</span> f=<span class="keyword">this</span>,<span class="keyword">this</span>.imageLoadListeners.push(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;f.render(a,b,e)&#125;),<span class="keyword">void</span> <span class="number">0</span>;b=b||&#123;&#125;,g=<span class="keyword">this</span>.srcImage.naturalWidth,h=<span class="keyword">this</span>.srcImage.naturalHeight,i=b.width,j=b.height,k=b.maxWidth,l=b.maxHeight,m=!<span class="keyword">this</span>.blob||<span class="string">"image/jpeg"</span>===<span class="keyword">this</span>.blob.type,i&amp;&amp;!j?j=h*i/g&lt;&lt;<span class="number">0</span>:j&amp;&amp;!i?i=g*j/h&lt;&lt;<span class="number">0</span>:(i=g,j=h),k&amp;&amp;i&gt;k&amp;&amp;(i=k,j=h*i/g&lt;&lt;<span class="number">0</span>),l&amp;&amp;j&gt;l&amp;&amp;(j=l,i=g*j/h&lt;&lt;<span class="number">0</span>),n=&#123;<span class="attr">width</span>:i,<span class="attr">height</span>:j&#125;;<span class="keyword">for</span>(o <span class="keyword">in</span> b)n[o]=b[o];p=a.tagName.toLowerCase(),<span class="string">"img"</span>===p?a.src=c(<span class="keyword">this</span>.srcImage,n,m):<span class="string">"canvas"</span>===p&amp;&amp;d(<span class="keyword">this</span>.srcImage,a,n,m),<span class="string">"function"</span>==<span class="keyword">typeof</span> <span class="keyword">this</span>.onrender&amp;&amp;<span class="keyword">this</span>.onrender(a),e&amp;&amp;e()&#125;,<span class="string">"function"</span>==<span class="keyword">typeof</span> define&amp;&amp;define.amd?define([],<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> f&#125;):<span class="keyword">this</span>.MegaPixImage=f&#125;();</span><br></pre></td></tr></table></figure>
+<h2 id="router-link标签-属性（props）"><a href="#router-link标签-属性（props）" class="headerlink" title="router-link标签 属性（props）"></a><code>router-link标签</code> 属性（props）</h2><ol>
+<li><code>append</code> 默认 <code>false</code> 设置后相当于在当前路径之后添加新路径</li>
+<li><code>tag</code> 设置 <code>router-link</code> 渲染后的标签</li>
+<li><code>active-class</code> 设置链接激活后的样式名称</li>
+<li><code>event</code> 设置触发跳转的事件</li>
+</ol>
+<h2 id="scrollBehavior"><a href="#scrollBehavior" class="headerlink" title="scrollBehavior"></a>scrollBehavior</h2><p>自定义路由切换时页面如何滚动</p>
+<blockquote>
+<p>浏览器需要支持 <code>history.pushState</code></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scrollBehavior (to, <span class="keyword">from</span>, savedPosition) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">0</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="router-addRoutes-routes-Array-lt-RouteConfig"><a href="#router-addRoutes-routes-Array-lt-RouteConfig" class="headerlink" title="router.addRoutes(routes: Array\&lt;RouteConfig>)"></a>router.addRoutes(routes: Array\&lt;RouteConfig>)</h2><p>动态添加更多的路由规则</p>
+<h2 id="router-onReady-callback-errorCallback"><a href="#router-onReady-callback-errorCallback" class="headerlink" title="router.onReady(callback, [errorCallback])"></a>router.onReady(callback, [errorCallback])</h2><p>在路由完成初始导航时调用</p>
+<h2 id="router-onError-callback"><a href="#router-onError-callback" class="headerlink" title="router.onError(callback)"></a>router.onError(callback)</h2><p>注册一个回调，该回调会在路由导航过程中出错时被调用</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/实战经验/" rel="tag"><i class="fa fa-tag"></i> 实战经验</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/02/SASS笔记/" rel="next" title="SASS笔记">
+                <i class="fa fa-chevron-left"></i> SASS笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+      
+      <div class="my_post_copyright">
+        <p><span>本文标题: </span><a href="/2019/04/10/半年经验总结/">半年经验总结</a></p>
+        <p><span>文章作者: </span><a href="/" title="访问 无聊大作战 的个人博客">无聊大作战</a></p>
+        <p><span>发布时间: </span>2019年04月10日 - 11:04</p>
+        <p><span>最后更新: </span>2019年04月10日 - 11:04</p>
+        <p><b>转载请注明出处，谢谢！</b></p>
+      </div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            博主信息
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="无聊大作战">
+            
+              <p class="site-author-name" itemprop="name">无聊大作战</p>
+              <p class="site-description motion-element" itemprop="description">半路出家，自学前端半年</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Se7suna" target="_blank" title="GitHub" rel="external nofollow noopener noreferrer"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://wpa.qq.com/msgrd?v=3&uin=381897638&site=qq&menu=yes" target="_blank" title="QQ" rel="external nofollow noopener noreferrer"><i class="fa fa-fw fa-qq"></i>QQ</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#半年经验总结"><span class="nav-text">半年经验总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue对象后添加属性"><span class="nav-text">Vue对象后添加属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue数据改变后不渲染"><span class="nav-text">Vue数据改变后不渲染</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node-sass安装失败"><span class="nav-text">node-sass安装失败</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不生成map文件"><span class="nav-text">不生成map文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#font-family"><span class="nav-text">font-family</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单行省略号"><span class="nav-text">单行省略号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多行省略号"><span class="nav-text">多行省略号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保留两位小数"><span class="nav-text">保留两位小数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue里使用箭头函数"><span class="nav-text">Vue里使用箭头函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chormeADB调试"><span class="nav-text">chormeADB调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期转时间戳"><span class="nav-text">日期转时间戳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意main-js创建实例的时间"><span class="nav-text">注意main.js创建实例的时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#金额单位为分"><span class="nav-text">金额单位为分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue项目静态资源"><span class="nav-text">Vue项目静态资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打包后背景图路径错误"><span class="nav-text">打包后背景图路径错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量名"><span class="nav-text">变量名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字体渐变色"><span class="nav-text">字体渐变色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Router-History模式页面空白"><span class="nav-text">Router History模式页面空白</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#img-正方形自适应"><span class="nav-text">img 正方形自适应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npm设置淘宝源"><span class="nav-text">npm设置淘宝源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过component元素-动态绑定自定义组件"><span class="nav-text">通过component元素 动态绑定自定义组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-绑定事件默认传入实参-event-也可以自己传入-event"><span class="nav-text">Vue 绑定事件默认传入实参 event, 也可以自己传入 $event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#passive-修饰符可提高移动端滚动性能"><span class="nav-text">.passive 修饰符可提高移动端滚动性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ul-ol-table-select-内部元素有限制"><span class="nav-text">ul, ol, table, select 内部元素有限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在自定义组件上监听原生事件"><span class="nav-text">在自定义组件上监听原生事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义组件的-v-model"><span class="nav-text">自定义组件的 v-model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sync-修饰符"><span class="nav-text">.sync 修饰符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slot-插槽"><span class="nav-text">slot 插槽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖注入"><span class="nav-text">依赖注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强制更新"><span class="nav-text">强制更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态内容缓存"><span class="nav-text">静态内容缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-nextTick"><span class="nav-text">vm.$nextTick()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由映射相同组件会复用"><span class="nav-text">路由映射相同组件会复用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由视图命名"><span class="nav-text">路由视图命名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-on-event-callback"><span class="nav-text">vm.$on(event, callback)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检测数据类型"><span class="nav-text">检测数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置根元素继承特性"><span class="nav-text">设置根元素继承特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目打包优化"><span class="nav-text">项目打包优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux下-install-报错-EACCES-permission-denied"><span class="nav-text">Linux下 install 报错 EACCES: permission denied</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS压缩图片"><span class="nav-text">JS压缩图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#router-link标签-属性（props）"><span class="nav-text">router-link标签 属性（props）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scrollBehavior"><span class="nav-text">scrollBehavior</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#router-addRoutes-routes-Array-lt-RouteConfig"><span class="nav-text">router.addRoutes(routes: Array\&lt;RouteConfig&gt;)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#router-onReady-callback-errorCallback"><span class="nav-text">router.onReady(callback, [errorCallback])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#router-onError-callback"><span class="nav-text">router.onError(callback)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">无聊大作战</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+<div class="powered-by">
+<span id="busuanzi_container_site_uv">
+  访客数 : <span id="busuanzi_value_site_uv"></span>  
+</span>
+<span id="busuanzi_container_page_pv">
+    访问量 : <span id="busuanzi_value_page_pv"></span>
+</span>
+</div>
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":100,"height":150},"mobile":{"show":false},"log":false});</script></body>
+</html>
